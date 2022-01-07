@@ -1,0 +1,46 @@
+
+<section class="add-product ">
+    <div class="container mt-4 pb-5">
+        <div class="row d-flex justify-content-center mt-md-5 ">
+
+            <div class="col-md-6">
+                <h2 style="margin-left: -120px;" class="text-center mt-4">Add Coupon</h2>
+                <form class="" action="/admin/add-coupon" onsubmit="return categoryvalidate()" method="post">
+                    <p id="message" class="text-danger"></p>
+                    <label for="">Coupon Code</label>
+                    <input id="categoryName" type="text" name="coupon" class="form-control w-75">
+                    <label for="">Discount</label>
+                    <input id="percentage" onkeypress="return validateNumber(event)" type="text" name="discount" min="1" max="90" class="form-control w-75"  id="code_pin" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2">
+                    <label for="">Expire Date</label>
+                    <input id="expiredate" type="date" name="expireDate" class="form-control w-75">
+                    <button style="width: 5em; height:2em" type="submit" class="btn btn-success mt-4">Submit</button>
+                    </div>
+                   
+                    <!--in case of file uploading use in above form as enctype="multipart/form-data" -->
+                    
+
+                  
+
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+      
+    function categoryvalidate(){ 
+        var username1 = document.getElementById('categoryName').value;
+        console.log(document.getElementById('categoryName').value)
+        
+        if(username1.trim()=="")
+        {   
+            document.getElementById('message').innerHTML="Coupon name cannot be empty"
+            return false; 
+        }
+        else{
+            return true
+        }
+    }
+</script>

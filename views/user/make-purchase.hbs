@@ -1,0 +1,570 @@
+<section class="cart-view">
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-lg-9 ">
+                <div class="">
+
+                    {{!-- --}}
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                            ADD NEW ADDRESS
+                        </button>
+                    </div>
+
+
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content bg-light">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">ADD NEW ADDRESS</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    
+                                    {{!-- body --}}
+                                    <div class="row">
+                                        <div class="col-12 mb-4">
+                                            <div class="card mb-4">
+
+                                                <div class="card-body">
+                                                    <form action="/add-address"  method="post">
+                                                    <p class="text-danger" id="message"></p>
+                                                        <div class="card-header py-1 mb-3">
+                                                            <h5 class="mb-0">Contact details</h5>
+                                                        </div>
+                                                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="username" type="text" id="Addusername"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="Name">Name</label>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <!-- Number input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="mobile" type="number" id="mobile"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example6">Mobile
+                                                                No.</label>
+                                                        </div>
+                                                        <div class="card-header py-1 mb-3">
+                                                            <h5 class="mb-0">ADDRESS</h5>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="pincode" type="text" id="pincode"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example4">Pin
+                                                                Code</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="address" type="text" id="address"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example4">Address(House
+                                                                No,Building, Street, Area)</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="locality" type="text" id="locality"
+                                                                class="form-control" />
+                                                            <label class="form-label"
+                                                                for="form7Example4">Locality/Town</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="city" type="text" id="city"
+                                                                class="form-control" />
+                                                            <label class="form-label"
+                                                                for="form7Example4">City/District</label>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="state" type="text" id="state"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example4">State</label>
+                                                        </div>
+
+                                                        <button onclick="return validateAddress()" style="background-color:#0F9CEB; color:white;"
+                                                            type="submit" class="btn w-100">Add Address</button>
+
+
+
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- body end --}}
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        {{!-- --}}
+
+                    </div>
+
+
+                    <form action="/make-purchase1" method="post">
+
+                        <div>
+                            {{#each address}}
+                            <div class="card w-100 mt-3">
+                                <div class="card-body">
+                                    <input type="radio" id="html" name="fav_language" value="{{this._id}}" checked>
+                                    <label for="html">Address</label><br>
+                                    <h6 class="card-subtitle mb-2 text-muted mt-3 fs-6">{{this.username}}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{this.address}}, {{this.pincode}},
+                                        {{this.locality}}</h6>
+                                    <h6 class="card-subtitle mb-2 "><span class="text-muted">Mobile:
+                                        </span>{{this.mobile}}</h6>
+
+                                      <a href="/edit-address/{{this._id}}" class=" btn btn-outline-dark card-link">Edit</a>
+                                    
+                                    <button value="{{this._id}}"  type="button" class="btn btn-outline-dark card-link delete" data-bs-toggle="modal" data-bs-target="#myModal1"> × Remove</button>
+
+                                </div>
+                            </div>
+                            {{/each}}
+
+                        </div>
+
+                    </form>
+
+
+
+            </aside>
+            <aside class="col-lg-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <h5>Payment Method</h5>
+                                <div class="mt-2">
+                                    <input type="radio" id="html" name="fav_languag" value="COD" checked> <span>COD</span>
+                                </div>
+                                <div>
+                                    <input type="radio" id="html" name="fav_languag" value="pay online"> <span>Pay
+                                        Online</span>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Total price:</dt>
+                            <dd class="text-right ml-3"> Rs.<span id="total">{{total}}</span> </dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Discount:</dt>
+                            <dd id="discount" class="text-right text-danger ml-3"> {{discount}}</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Total: </dt>
+                            <dd class="text-right text-dark b ml-3"><strong> <span id="total1">₹{{total}}</span>
+                                </strong></dd>
+                        </dl>
+                        <hr> <button onclick="makePurchase()" class="btn btn-out btn-white btn-outline-info  btn-square btn-main"
+                            data-abc="true"><img height="26" width="100" src="/images/razorpay.png" alt=""></button> 
+
+                            <button onclick="makePaypal()" class=" my-2 btn btn-out btn-outline-warning btn-square btn-main"
+                            data-abc="true"> <img src="/images/paypal.png" height="23" width="100" alt=""> </button> 
+                             
+                            <a href="/" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
+
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div id="total" class="d-none">{{total}}</div>
+    <div id="total" class="d-none">{{products}}</div>
+
+
+</section>
+
+
+<section class="modalcustomconfirmation">
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal1">
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+		  
+		  
+       <a href="" class="btn btn-outline-danger confirm">Confirm</a>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+<script>
+	$(document).on("click", ".delete", function () {
+     var value = $(this).val();
+  console.log("value : ", $(this).val())
+
+   $(".modal-dialog .confirm").attr("href","/remove-address/"+value)
+});
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+
+
+    .cart-view .container-fluid {
+        background-color: #ecf0f3;
+        font-family: 'Open Sans', serif;
+        font-size: 14px;
+        padding: 5%;
+        margin-top: 10%
+    }
+
+    @media(max-width: 680px) {
+        .cart-view .container-fluid {
+            margin-top: 35%;
+        }
+    }
+
+    .cart-view .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.40rem
+    }
+
+    .cart-view .img-sm {
+        width: 80px;
+        height: 80px
+    }
+
+    .cart-view .itemside .info {
+        padding-left: 15px;
+        padding-right: 7px
+    }
+
+    .cart-view .table-shopping-cart .price-wrap {
+        line-height: 1.2
+    }
+
+    .cart-view .table-shopping-cart .price {
+        font-weight: bold;
+        margin-right: 5px;
+        display: block
+    }
+
+    .cart-view .text-muted {
+        color: #969696 !important
+    }
+
+    .cart-view a {
+        text-decoration: none !important
+    }
+
+    .cart-view .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: 0px
+    }
+
+    .cart-view .itemside {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%
+    }
+
+    .cart-view .dlist-align {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex
+    }
+
+    [class*="dlist-"] {
+        margin-bottom: 5px
+    }
+
+    .cart-view .coupon {
+        border-radius: 1px
+    }
+
+    .cart-view .price {
+        font-weight: 600;
+        color: #212529
+    }
+
+    .cart-view .btn.btn-out {
+        outline: 1px solid #fff;
+        outline-offset: -5px
+    }
+
+    .cart-view .btn-main {
+        border-radius: 2px;
+        text-transform: capitalize;
+        font-size: 15px;
+        padding: 10px 19px;
+        cursor: pointer;
+        color: #fff;
+        width: 100%
+    }
+
+    .cart-view .btn-light {
+        color: #ffffff;
+        background-color: #F44336;
+        border-color: #f8f9fa;
+        font-size: 12px
+    }
+
+    .cart-view .btn-light:hover {
+        color: #ffffff;
+        background-color: #F44336;
+        border-color: #F44336
+    }
+
+    .cart-view .btn-apply {
+        font-size: 11px
+    }
+</style>
+
+
+{{!--
+<script>
+    $(document).ready(function () {
+
+        $('input[type=radio][name=fav_language]').change(function () {
+            console.log(this.value)
+
+            makePurchase(this.value)
+        });
+
+    });
+</script> --}}
+<script>
+    var total=document.getElementById('total').innerHTML
+    var grandtotal=document.getElementById('total1')    
+    var discount = document.getElementById('discount').innerHTML
+    
+    console.log(total)
+   discount=~~discount;
+    console.log(discount)
+    grandtotal.innerHTML=parseInt(total)-parseInt(discount)
+</script>
+
+<script>
+    function makePurchase() {
+        var deliveryMethod = document.querySelector('input[name="fav_languag"]:checked').value;
+        var deliveryAddress = document.querySelector('input[name="fav_language"]:checked').value;
+        var totalf = document.getElementById('total')
+        var total = totalf.textContent
+
+
+
+
+        $.ajax({
+            url: '/make-purchase',
+            data: {
+
+                deliveryAddress: deliveryAddress,
+                paymentMethod: deliveryMethod
+                //product:prodId,
+                //count:count,
+                //quantity:quantity
+
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.codSuccess) {
+                    location.href = '/order-success'
+                } else {
+                    razorpayPayment(response)
+                    
+
+                }
+            }
+        })
+    }
+
+    function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_R7ncH3P3rsEiai", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "WECART",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+                
+
+                verifyPayment(response,order)
+            },
+            "prefill": {
+                "name": "Rafeeq MA",
+                "email": "rafeeqmaz@gmail.com",
+                "contact": "8111969169"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+        
+    }
+
+    function verifyPayment(payment,order){
+        $.ajax({
+            method:'post',
+            url:'/verify-payment',
+            data:{
+                payment,
+                order
+            },
+            success:(response)=>{
+                if(response.status){
+                    location.href = '/order-success'
+                }else{
+                    alert('payment failed')
+                }
+
+            }
+        })
+    }
+
+</script>
+
+
+
+
+{{!-- paypal --}}
+<script>
+    function makePaypal() {
+        var deliveryMethod = document.querySelector('input[name="fav_languag"]:checked').value;
+        var deliveryAddress = document.querySelector('input[name="fav_language"]:checked').value;
+        var totalf = document.getElementById('total')
+        var total = totalf.textContent
+
+
+
+
+        $.ajax({
+            url: '/pay',
+            data: {
+
+                deliveryAddress: deliveryAddress,
+                paymentMethod: deliveryMethod
+                //product:prodId,
+                //count:count,
+                //quantity:quantity
+
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.codSuccess) {
+                    location.href = '/order-success'
+                } else {
+                    console.log(response)
+                   window.location.replace(response.href);
+                    
+
+                }
+            }
+        })
+    }
+</script>
+
+<script>
+    var username = document.getElementById('Addusername')
+    var mobile = document.getElementById('mobile')
+    var pincode = document.getElementById('pincode')
+    var address = document.getElementById('address')
+    var locality = document.getElementById('locality')
+    var city = document.getElementById('city')
+    var state = document.getElementById('state')
+    function validateAddress(){
+        console.log(mobile.value)
+        if(username.value==''){
+            document.getElementById('message').innerHTML="please fill the username"
+            return false
+        }
+        else if(mobile.value==''){
+            document.getElementById('message').innerHTML="please fill the mobile"
+            return false
+        }
+        else if(pincode.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the pincode"
+            return false
+        }
+        else if(address.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the address"
+            return false
+        }
+        else if(locality.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the locality"
+            return false
+        }
+        else if(city.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the city"
+            return false
+        }
+        else if(state.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the state"
+            return false
+        }
+        else{
+            return true
+        }
+
+    }
+</script>

@@ -1,0 +1,216 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+
+
+
+<div class="container all-products pt-2">
+
+
+
+
+    <h5> Orders</h5>
+    <hr>
+
+
+
+    <div class="hscroll">
+        <table width="100%" border="1" cellspacing="0" cellpadding="6" id="datatable"
+            class="table table-hover shopping-cart-wrap">
+            <thead class="text-muted">
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col" width="120">Payment</th>
+                    <th scope="col" width="120">Status</th>
+                    <th scope="col" width="120">Price</th>
+                    <th scope="col" width="200" class="text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                <tr class="tablerow">
+                    <td>
+                        <figure class="media">
+
+                            <figcaption class="media-body">
+                                <h6  class="title text-truncate">Order Date: <span
+                                        class="date">{{this.orders.orderDate}}</span> </h6>
+                                <dl class="param param-inline small">
+                                    <dt>Payment Method: </dt>
+                                    <dd>{{this.orders.paymentMethod}}</dd>
+                                </dl>
+
+                                <dl class="param param-inline small">
+                                    <dt>address:</dt>
+                                    <dd style="color:rgb(69, 69, 69)">{{this.orders.deliveryaddress.address.username}},
+                                        {{this.orders.deliveryaddress.address.mobile}},
+                                        {{this.orders.deliveryaddress.address.address}},
+                                        {{this.orders.deliveryaddress.address.city}},
+                                        {{this.orders.deliveryaddress.address.state}},
+                                        {{this.orders.deliveryaddress.address.pincode}} </dd>
+                                </dl>
+                            </figcaption>
+                        </figure>
+                    </td>
+                    <td>
+                        {{#if this.orders.order}}
+                        <p>{{this.orders.status}}</p>
+                        {{else}}
+                        <p class="text-danger">order cancelled</p>
+                        {{/if}}
+                    </td>
+                    <td>
+                        {{!-- <p>{{this.orders.order_status}}</p> --}}
+                        <select onchange="selectboxchange(event)" name="status" id="selectbox"
+                            class="form-select selectbox" aria-label="Default select example">
+                            <option value="{{this._id}}">{{this.orders.order_status}}</option>
+                            <option value="{{this._id}}">pending</option>
+                            <option value="{{this._id}}">Shipped</option>
+                            <option value="{{this._id}}">delivered</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="price-wrap">
+                            <var class="price">₹ {{this.orders.total}}</var>
+                            {{!-- <small class="text-muted">(USD5 each)</small> --}}
+                        </div> <!-- price-wrap .// -->
+                    </td>
+                    <td class="text-right">
+                        <a href="/admin/edit-order/{{this.orders._id}}" class="btn btn-primary"> Edit</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div> <!-- card.// -->
+
+</div>
+<!--container end.//-->
+</article>
+<script>
+
+
+    const tablerow = document.getElementsByClassName('tablerow')
+    for (const x of tablerow) {
+        var date = x.querySelector('.date')
+        date1 = date.innerHTML
+        date1 = date1.split("GMT")[0]
+        date.innerHTML = date1
+
+    }
+</script>
+<style>
+    .hscroll {
+        overflow-x: auto;
+        /* Horizontal */
+    }
+
+    .all-products {
+        margin-top: 10%;
+        background-color: #ecf0f3;
+    }
+
+    .param {
+        margin-bottom: 7px;
+        line-height: 1.4;
+    }
+
+    .param-inline dt {
+        display: inline-block;
+    }
+
+    .param dt {
+        margin: 0;
+        margin-right: 7px;
+        font-weight: 600;
+    }
+
+    .param-inline dd {
+        vertical-align: baseline;
+        display: inline-block;
+    }
+
+    .param dd {
+        margin: 0;
+        vertical-align: baseline;
+    }
+
+    .shopping-cart-wrap .price {
+        color: red;
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 5px;
+        display: block;
+    }
+
+    var {
+        font-style: normal;
+    }
+
+    .media img {
+        margin-right: 1rem;
+    }
+
+    .img-sm {
+        width: 90px;
+        max-height: 75px;
+        object-fit: cover;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable();
+    });
+</script>
+
+<script>
+
+
+
+    function selectboxchange(event) {
+        console.log(event.target)
+        for (const x of event.target.querySelectorAll('option'))
+            if (x.selected) {
+                var text = x.innerHTML
+                var id = x.value
+
+            }
+        console.log(id)
+        console.log(text)
+
+        $.ajax({
+            method: 'get',
+            url: '/admin/' + text + '/' + id,
+            success: function (response) {
+                
+            }
+
+        })
+    }
+
+
+</script>
+//reload page when press back button
+
+
+<script>
+
+
+        window.addEventListener( "pageshow", function ( event ) {
+            console.log(event)
+     var perfEntries = performance.getEntriesByType("navigation");
+     if (perfEntries[0].type === "back_forward") {
+       location.reload();
+     }
+    });
+</script>

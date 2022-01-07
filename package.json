@@ -1,0 +1,28 @@
+{
+  "name": "wecart",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "bootstrap-icons": "^1.7.2",
+    "cookie-parser": "~1.4.4",
+    "currency-converter-lt": "^1.1.9",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-fileupload": "^1.2.1",
+    "express-handlebars": "^6.0.2",
+    "express-session": "^1.17.2",
+    "hbs": "^4.2.0",
+    "http-errors": "~1.6.3",
+    "mongodb": "^4.2.1",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.15",
+    "paypal-rest-sdk": "^1.8.1",
+    "razorpay": "^2.8.0",
+    "twilio": "^3.71.3"
+  }
+}

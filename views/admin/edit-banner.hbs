@@ -1,0 +1,86 @@
+
+<section class="add-product ">
+    <div class="container mt-4 pb-5">
+        <div class="row d-flex justify-content-center mt-md-5 ">
+
+            <div class="col-md-6">
+                <h2 style="margin-left: -120px;" class="text-center mt-4 mb-4">Add Banner</h2>
+                <form class="" action="/admin/edit-banner" method="post" onsubmit="return bannervalidate()" enctype="multipart/form-data">
+
+                
+                    <div class="row">
+                        <div class="col-12 d-flex">
+                            {{!-- <label for="">Banner Name</label> --}}
+                    {{!-- <input type="text" id="brandName" name="bannerName" class="form-control w-75"> --}}
+                    
+                    <label class="me-3" for="">Main Banner 1</label>
+                    <input type="file" name="image1" class="form-control w-50" onchange="viewImage(event)">
+                    <img class="mx-5" height="40em" width="220em" id="imgview" src="/images/banner-images/{{banner._id}}_1.png" alt="">  
+                        </div>
+
+                        <div class="col-12 d-flex mt-5">
+                           
+                    <input type="text" name="_id" value="{{banner._id}}" class="d-none">
+                    <label class="me-3" for="">Main Banner 2</label>
+                    <input type="file" name="image2" class="form-control w-50" onchange="viewImage2(event)">
+                    <img class="mx-5" height="40em" width="220em" id="imgview2" src="/images/banner-images/{{banner._id}}_2.png" alt="">  
+                        </div>
+
+
+                        <div class="col-12 d-flex mt-5">
+                           
+    
+                    <label class="me-3" for="">Main Banner 3</label>
+                    <input type="file" name="image3" class="form-control w-50" onchange="viewImage3(event)">
+                    <img class="mx-5" height="40em" width="220em" id="imgview3" src="/images/banner-images/{{banner._id}}_3.png" alt="">  
+                        </div>
+
+
+                    </div>
+                    <p class="text-danger" id="message"></p>
+                    
+                    
+                    <button style="width: 5em; height:2em" type="submit" class="btn btn-success mt-4">Submit</button>
+                    </div>
+                   
+                    <!--in case of file uploading use in above form as enctype="multipart/form-data" -->
+                    
+    
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function viewImage(){
+        document.getElementById('imgview').src=URL.createObjectURL(event.target.files[0])
+        
+
+    }
+    function viewImage2(){
+        document.getElementById('imgview2').src=URL.createObjectURL(event.target.files[0])
+        
+
+    }
+    function viewImage3(){
+        document.getElementById('imgview3').src=URL.createObjectURL(event.target.files[0])
+        
+
+    }
+</script>
+
+<script>
+    var username = document.getElementById('brandName');  
+    function bannervalidate(){ 
+        
+        if(username.value.trim()=="")
+        {   
+      document.getElementById('message').innerHTML="brand name cannot be empty"
+      return false; 
+        }
+        else{
+            return true
+        }
+    }
+</script>

@@ -1,0 +1,286 @@
+<style>
+    body{
+        margin: 5%;
+        padding: 0;
+    }
+    .mt-50 {
+    margin-top: 50px
+}
+
+.mb-50 {
+    margin-bottom: 50px
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 20%;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .1875rem
+}
+
+.card-img-actions {
+    position: relative
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    text-align: center
+}
+
+.card-img {
+    width: 350px;
+}
+
+.star {
+    color: red
+}
+
+.bg-cart {
+    background-color: orange;
+    color: #fff
+}
+
+.bg-cart:hover {
+    color: #fff
+}
+
+.bg-buy {
+    background-color: #fb641b;
+    color: #fff;
+    padding-right: 29px;
+}
+
+.bg-buy:hover {
+    color: #fff
+}
+
+a {
+    text-decoration: none !important
+}
+
+
+
+</style>
+<section class=""> 
+    <!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+  <!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="banner1"  src="/images/banner-images/{{mainbanner._id}}_1.png" height="340" alt="Los Angeles" class="d-block ">
+    </div>
+    <div class="carousel-item">
+       <img class="banner1" src="/images/banner-images/{{mainbanner._id}}_2.png" alt="Los Angeles" class="d-block">
+    </div>
+    <div class="carousel-item">
+      <img class="banner1" src="/images/banner-images/{{mainbanner._id}}_3.png" alt="Los Angeles" class="d-block">
+    </div>
+  </div>
+
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev slide-icon" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next slide-icon" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon slide-iocn"></span>
+  </button>
+</div>
+</section>
+
+
+<section>
+    <div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row">
+        {{#each products}}
+        <div class="col-md-3 col-lg-3 mt-4 tablerow">
+            <div class="card w-100" >
+                <div class="card-body ">
+                    <a href="/product-view/{{this._id}}">
+                         <div class="card-img-actions"> <img src="/images/product-images/{{this._id}}_1.png" class="card-img img-fluid" width="96" height="300" alt=""> </div>
+                    </a>
+                   
+                </div>
+                <div class="card-body bg-light text-center" style="height: 230px;">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2"> <a href="/product-view/{{this._id}}" class="text-default mb-2" data-abc="true">{{this.Name}}</a> </h6> <a href="#" class="text-muted" data-abc="true">{{brand}}</a>
+                    </div>
+                    <h3 class="mb-3 font-weight-semibold">₹<span id="offer" class="offer">{{this.offer}} </span >&nbsp; <del> <span class=" text-secondary" style="font-size: 18px; font-weight: 100;">₹</span><span class="price text-secondary" style="font-size: 18px; font-weight: 100;">{{this.price}} </span> </del> <span style="font-size: 16px;" class="text-success"> {{this.offer}}% off</span></h3>
+                    {{!-- <div> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> </div>     --}}
+                    {{!-- <div class="text-muted mb-3">34 reviews</div> --}}
+                     <a href="/product-view/{{this._id}}" type="button" class="btn bg-cart"><i class="fa fa-cart-plus ms-0"></i> Shop Now</a>
+                     <button onclick="addToWishlist('{{this._id}}')" class="btn bg-buy"><i class="fa fa-heart ms-2"></i> Wishlist</button>
+                    
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+</section>
+<!-- Button to Open the Modal -->
+
+
+<!-- The Modal -->
+<div class="modal" id="modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header border-0">
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div id="modalbody" class="modal-body">
+        <div class="thank-you-pop">
+							<img id="wishlistimage" src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+							<h1 id="thankyou"></h1>
+							
+							
+ 		</div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+    const tablerow = document.getElementsByClassName('tablerow')
+    for(const x of tablerow){
+        let offer = x.querySelector('.offer')
+        let price = x.querySelector('.price').innerHTML
+        offer1 = offer.innerHTML
+        offerprice = parseInt(price)* parseInt(offer1)/100
+        offerprice1 = parseInt(price)-parseInt(offerprice)
+        console.log(offerprice)
+        offer.innerHTML=offerprice1
+    }
+</script>
+
+<script>
+  function addToWishlist(proId){
+      var bs_modal = $('#modal');
+      var message = document.getElementById('thankyou')
+      var image=document.getElementById('wishlistimage')
+    $.ajax({
+        url:'/add-to-wishlist/'+proId,
+        method:'get',
+        success:(response)=>{
+            console.log(response)
+            if(response.login)
+            {
+                location.href="/login"
+            }
+            else{
+
+                console.log(response)
+            if (response=="error"){
+                
+                
+                bs_modal.modal('show');
+                message.innerHTML="Product already in Wishlist"
+                image.src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png"
+            }
+            else{
+                
+                
+                bs_modal.modal('show');
+                message.innerHTML="Product added to wishlist"
+            }
+
+            }
+            
+            
+                
+
+            
+            
+        }
+    })
+}
+  
+</script>
+
+<style>
+    /*--thank you pop starts here--*/
+.thank-you-pop{
+	width:100%;
+ 	padding:2px;
+	text-align:center;
+}
+.thank-you-pop img{
+	width:76px;
+	height:auto;
+	margin:0 auto;
+	display:block;
+	margin-bottom:25px;
+}
+
+.thank-you-pop h1{
+	font-size: 22px;
+    margin-bottom: 25px;
+	color:#5C5C5C;
+}
+.thank-you-pop p{
+	font-size: 20px;
+    margin-bottom: 27px;
+ 	color:#5C5C5C;
+}
+.thank-you-pop h3.cupon-pop{
+	font-size: 25px;
+    margin-bottom: 40px;
+	color:#222;
+	display:inline-block;
+	text-align:center;
+	padding:10px 20px;
+	border:2px dashed #222;
+	clear:both;
+	font-weight:normal;
+}
+.thank-you-pop h3.cupon-pop span{
+	color:#03A9F4;
+}
+.thank-you-pop a{
+	display: inline-block;
+    margin: 0 auto;
+    padding: 9px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: #8BC34A;
+    border-radius: 17px;
+}
+.thank-you-pop a i{
+	margin-right:5px;
+	color:#fff;
+}
+#ignismyModal .modal-header{
+    border:0px;
+}
+/*--thank you pop ends here--*/
+
+</style>
+

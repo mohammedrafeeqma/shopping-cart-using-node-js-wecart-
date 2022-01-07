@@ -1,0 +1,646 @@
+
+<section class="add-product ">
+    <div class="container mt-4 ">
+        <div class="row d-flex justify-content-center mt-md-5 ">
+
+            <div class="col-md-6">
+                <h2 id="add-product" style="margin-left: -120px;" class="text-center mt-4">Add Product</h2>
+                <form action="" onsubmit="return validate()" method="post" enctype="multipart/form-data">
+                <p class="text-danger" id="message"></p>
+                    <label for="">Name</label>
+                    <input type="text" id="Name1" name="Name" class="form-control w-75">
+
+                    <select name="category" id="category" class="form-select w-75 my-3" aria-label="Default select example">
+                        <option selected>Category{{category.Name}}</option>
+                        {{#each category}}
+                        <option value="{{this.Name}}">{{this.Name}}</option>
+                        {{/each}}
+                    </select>
+
+                    <select name="brand" id="brand" class="form-select w-75 my-3" aria-label="Default select example">
+                        <option selected>Brand</option>
+                        {{#each brand}}
+                        <option value="{{this.brandName}}">{{this.brandName}}</option>
+                        {{/each}}
+                    </select>
+
+                    
+                    <div class="form-group">
+                    <label for="comment">Description</label>
+                    <textarea name="description"  class="form-control h-25 w-75" rows="5" cols="4" id="comment"></textarea>
+                    </div>
+
+                    <label for="">Price</label>
+                    <input type="text" id="price" onkeypress="return validateNumber(event)" name="price" class="form-control w-75">
+
+                   
+                    <div class="row mt-3 mb-3">
+                        <label for="">Quantity</label>
+                        <div class="col-3">
+                            
+                            <input type="text" onkeypress="return validateNumber(event)" placeholder="small" id="quantity1" name="s" class="form-control w-75">
+                        </div>
+                        <div class="col-3">
+                            
+                            <input type="text" onkeypress="return validateNumber(event)" id="quantity2" placeholder="medium" name="m" class="form-control w-75">
+                        </div>
+                        
+                        <div class="col-3">
+                            
+                            <input type="text" onkeypress="return validateNumber(event)" id="quantity3" placeholder="large" name="l" class="form-control w-75">
+                        </div>
+                        <div class="col-3">
+                            
+                            <input type="text" onkeypress="return validateNumber(event)" id="quantity4" placeholder="xl" name="xl" class="form-control w-75">
+                        </div>
+                    </div>
+                    
+                    <div class="row d-lg-flex justify-content-lg-start w-75">
+                    <div class="col-6">
+                    <label for="">Image1</label>
+                    <input onchange="return ValidateFileUpload()"  accept=".jpg,.jpeg,.png" type="file" name="image1" id="" class="form-control w-50 image1">
+                    <img class="my-3" height="60em" width="60em" id="imgview1" src="/images/upload-icon.png" alt="">  
+                    </div>
+                    <div class=" col-6">
+                    <label for="">Image2</label>
+                      <input onchange="return ValidateFileUpload2()" accept=".jpg,.jpeg,.png" type="file" name="image2" id="" class="form-control w-50 image2"  > 
+                    <img class="my-3" height="60em" width="60em" id="imgview2" src="/images/upload-icon.png" alt="">  
+                    </div>
+                    <div class=" mt-2 col-6">
+                    <label for="">Image3</label>
+                      <input onchange="return ValidateFileUpload3()" accept=".jpg,.jpeg,.png" type="file" name="image3" id="" class="form-control w-50 image3" > 
+                    <img class="my-3" height="60em" width="60em" id="imgview3" src="/images/upload-icon.png" alt="">  
+                    </div>
+                    <div class="mt-2 col-6">
+                    <label for="">Image4</label>
+                      <input onchange="return ValidateFileUpload4()" accept=".jpg,.jpeg,.png" type="file" name="image4" id="" class="form-control w-50 image4"> 
+                    <img class="my-3" height="60em" width="60em" id="imgview4" src="/images/upload-icon.png" alt="">  
+                    </div>
+                    </div>
+                   
+                    <!--in case of file uploading use in above form as enctype="multipart/form-data" -->
+                    
+
+                  
+
+                    <button type="submit" id="button" class="btn btn-success mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop image</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="row">
+                                <div class="col-md-8">  
+                                    <!--  default image where we will set the src via jquery-->
+                                    <img id="image1">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- modal 2 croppin --}}
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop image2</h5>
+                        <button type="button" class="close" data-dismiss="modal1" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="row">
+                                <div class="col-md-8">  
+                                    <!--  default image where we will set the src via jquery-->
+                                    <img id="image2">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop1">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- modal 3 --}}
+        <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop image3</h5>
+                        <button type="button" class="close" data-dismiss="modal3" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="row">
+                                <div class="col-md-8">  
+                                    <!--  default image where we will set the src via jquery-->
+                                    <img id="image3">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop3">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{{!-- modal 4 --}}
+<div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop image3</h5>
+                        <button type="button" class="close" data-dismiss="modal4" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="row">
+                                <div class="col-md-8">  
+                                    <!--  default image where we will set the src via jquery-->
+                                    <img id="image4">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop4">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+<script>
+
+    var bs_modal = $('#modal');
+    var image1 = document.getElementById('image1');
+    
+    var cropper,reader,file;
+   var base64data
+
+    $("body").on("change", ".image1", function(e) {
+        var files = e.target.files;
+        var done = function(url) {
+            image1.src = url;
+ 
+
+         
+            var fname = e.target.files[0].name;
+            var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+if (!re.exec(fname)) {
+  alert("File extension not supported!");
+}
+else{
+    bs_modal.modal('show');
+
+}
+           
+        
+
+            
+            
+        };
+
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    bs_modal.on('shown.bs.modal', function() {
+        cropper = new Cropper(image1, {
+            aspectRatio: 5/6,
+            viewMode: 3,
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    $("#crop").click(function() {
+        canvas = cropper.getCroppedCanvas({
+    minWidth: 256,
+     minHeight: 256,
+     maxWidth: 4096,
+     maxHeight: 4096,
+     fillColor: '#fff',
+     imageSmoothingEnabled: true,
+     imageSmoothingQuality: 'high'
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+             bs_modal.modal('hide');
+            document.getElementById('imgview1').src=url
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+            base64data = reader.result;
+
+               
+            };
+        });
+    });
+ </script>
+ <script>
+
+    //second image
+
+     var bs_modal1 = $('#modal1');
+    var image2 = document.getElementById('image2');
+    
+    var cropper,reader,file;
+   var base64data2
+
+    $("body").on("change", ".image2", function(e) {
+        var files = e.target.files;
+        var done = function(url) {
+            image2.src = url;
+ 
+
+         
+            var fname = e.target.files[0].name;
+            var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+if (!re.exec(fname)) {
+  alert("File extension not supported!");
+}
+else{
+    bs_modal1.modal('show');
+
+}
+           
+        
+
+            
+            
+        };
+
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    bs_modal1.on('shown.bs.modal', function() {
+        cropper = new Cropper(image2, {
+            aspectRatio: 5/6,
+            viewMode: 3,
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    $("#crop1").click(function() {
+        canvas = cropper.getCroppedCanvas({
+        minWidth: 256,
+     minHeight: 256,
+     maxWidth: 4096,
+     maxHeight: 4096,
+     fillColor: '#fff',
+     imageSmoothingEnabled: true,
+     imageSmoothingQuality: 'high'
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+             bs_modal1.modal('hide');
+           document.getElementById('imgview2').src=url
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+            base64data2 = reader.result;
+
+               
+            };
+        });
+    });
+
+
+
+
+
+
+
+     
+
+</script>
+{{!-- crop 3 --}}
+<script>
+
+    //third image
+
+     var bs_modal3 = $('#modal3');
+    var image3 = document.getElementById('image3');
+    
+    var cropper,reader,file;
+   var base64data3
+
+    $("body").on("change", ".image3", function(e) {
+        var files = e.target.files;
+        var done = function(url) {
+            image3.src = url;
+ 
+
+         
+            var fname = e.target.files[0].name;
+            var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+if (!re.exec(fname)) {
+  alert("File extension not supported!");
+}
+else{
+    bs_modal3.modal('show');
+
+}
+           
+        
+
+            
+            
+        };
+
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    bs_modal3.on('shown.bs.modal', function() {
+        cropper = new Cropper(image3, {
+            aspectRatio: 5/6,
+            viewMode: 3,
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    $("#crop3").click(function() {
+        canvas = cropper.getCroppedCanvas({
+            minWidth: 256,
+     minHeight: 256,
+     maxWidth: 4096,
+     maxHeight: 4096,
+     fillColor: '#fff',
+     imageSmoothingEnabled: true,
+     imageSmoothingQuality: 'high'
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+             bs_modal3.modal('hide');
+           document.getElementById('imgview3').src=url
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+            base64data3 = reader.result;
+
+               
+            };
+        });
+    });
+
+</script>
+{{!-- modal 4  --}}
+<script>
+
+    //fourth image
+
+     var bs_modal4 = $('#modal4');
+    var image4 = document.getElementById('image4');
+    
+    var cropper,reader,file;
+   var base64data4
+
+    $("body").on("change", ".image4", function(e) {
+        var files = e.target.files;
+        var done = function(url) {
+            image4.src = url;
+ 
+
+         
+            var fname = e.target.files[0].name;
+            var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+if (!re.exec(fname)) {
+  alert("File extension not supported!");
+}
+else{
+    bs_modal4.modal('show');
+
+}
+           
+        
+
+            
+            
+        };
+
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    bs_modal4.on('shown.bs.modal', function() {
+        cropper = new Cropper(image4, {
+            aspectRatio: 5/6,
+            viewMode: 3,
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    $("#crop4").click(function() {
+        canvas = cropper.getCroppedCanvas({
+            minWidth: 256,
+     minHeight: 256,
+     maxWidth: 4096,
+     maxHeight: 4096,
+     fillColor: '#fff',
+     imageSmoothingEnabled: true,
+     imageSmoothingQuality: 'high'
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+             bs_modal4.modal('hide');
+           document.getElementById('imgview4').src=url
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+            base64data4 = reader.result;
+
+               
+            };
+        });
+    });
+
+</script>
+
+
+
+<script>
+    var Name = document.getElementById('Name1')
+    var category = document.getElementById('category')
+    var brand = document.getElementById('brand')
+    var description = document.getElementById('comment')
+    var price = document.getElementById('price')
+    var s = document.getElementById('quantity1')
+    var m = document.getElementById('quantity2')
+    var l = document.getElementById('quantity3')
+    var xl = document.getElementById('quantity4')
+    var view1 = document.getElementById('imgview1')
+    var view2 = document.getElementById('imgview2')
+    var view3 = document.getElementById('imgview3')
+    var view4 = document.getElementById('imgview4')
+    
+    $('#button').click(function(e){
+        console.log(view4.src)
+         e.preventDefault();
+        if(Name.value=='' || category.value=='Category' || brand.value=='Brand'|| description.value==''|| price.value==''|| s.value==''||m.value==''||l.value==''||xl.value==''||view1.src=='http://localhost:3000/images/upload-icon.png'|| view2.src=='http://localhost:3000/images/upload-icon.png'||view3.src=='http://localhost:3000/images/upload-icon.png'||view4.src=='http://localhost:3000/images/upload-icon.png')
+        {
+            document.getElementById('message').innerHTML="please fill the field"
+        }
+        else{
+
+        
+       
+        $.ajax({
+                    method: "POST",
+                    dataType: "json",
+                    url: "/admin/add-product",
+                    data: {image1: base64data,
+                            image2:base64data2,
+                            image3:base64data3,
+                            image4:base64data4,
+                            Name:Name.value,
+                            category:category.value,
+                            brand:brand.value,
+                            description:description.value,
+                            price:price.value,
+                            s:s.value,
+                            m:m.value,
+                            l:l.value,
+                            xl:xl.value
+                            
+
+                    
+                    },
+                    success: function(data) { 
+                       
+                        
+                        location.href='/admin/all-products'
+                    }
+                });
+
+    }
+
+    })
+
+     
+
+</script>
+
+<style>
+     img {
+            display: block;
+            max-width: 100%;
+        }
+        .preview {
+            overflow: hidden;
+            width: 130px; 
+            height: 130px;
+            margin: 10px;
+            border: 1px solid red;
+        }   
+</style>

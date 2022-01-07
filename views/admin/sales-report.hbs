@@ -1,0 +1,283 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+
+
+ <button onclick="generatePDF()" class="btn btn-dark d-flex ms-auto">Download as pdf</button>
+<div id="table">
+    <span class="date" id="date">date:</span>
+    <br>
+    <span id="time" class="">time:</span>
+
+    
+    <table id="" class=" table table-striped table-hover table-dark m-md-1">
+      
+  <h4 class="text-center mb-4" style="font-weight: 700
+  ;">Sales Report</h4>
+ 
+  <thead class="">
+    <input id="datefilter" class="ms-2 mb-2 form-control w-25 d-md-block d-none" placeholder="filter by date" type="text" name="datefilter" value="" />
+    <tr>
+      <th scope="col">Product Name</th>
+      <th scope="col">Brand Name</th>
+      <th scope="col">price</th>
+      <th scope="col">quantity</th>
+      <th scope="col">total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#if sales}}
+    <p id="startDate" class="d-none ms-2">{{date.startDate}} </p>
+    <span><b>From: </b></span>
+    <span id="startDate1"></span> <span><b>To: </b></span> <span id="endDate1"></span>
+    
+    <p id="endDate" class="d-none">{{date.endDate}}</p>
+      {{#each sales}}
+    <tr class="table-secondary text-dark">
+      <td data-label="Product Name"><span class="">{{this._id.name}}</span> <span class="badge rounded-pill" id="badge"></span> </td>
+      <td data-label="Brand Name">{{this._id.brand}}</td>
+      <td class="subjects" data-label="price">{{this._id.price}}</td>
+      <td class="subjects" data-label="Quantity">{{this.quantity}}</td>
+      <td id="total" data-label="Total">{{this.quantity}}</td>
+    </tr>
+    {{/each}}
+    {{else}}
+    
+      {{#each orders}}
+    <tr class="table-secondary text-dark">
+      <td data-label="Product Name" class="fw-bold"> {{this._id.name}} <span class="badge rounded-pill" id="badge"></span> </td>
+      <td data-label="Brand Name">{{this._id.brand}}</td>
+      <td class="subjects" data-label="price">{{this._id.price}}</td>
+      <td class="subjects fw-bolder" data-label="Quantity">{{this.quantity}}</td>
+      <td id="total" data-label="Total" class="text-dark">{{this.quantity}}</td>
+    </tr>
+    {{/each}}
+
+    {{/if}}
+  
+  </tbody>
+</table>
+</div>
+
+<script>
+  startDate = document.getElementById('startDate').innerHTML
+  endDate = document.getElementById('endDate').innerHTML
+  startDate1= document.getElementById('startDate1')
+  endDate1= document.getElementById('endDate1')
+  startDate = startDate.split("00:")[0]
+  endDate = endDate.split("23:")[0]
+  startDate1.innerHTML=" "+startDate
+  endDate1.innerHTML=" " +endDate
+</script>
+
+{{!-- Date filter --}}
+<script type="text/javascript">
+$(function() {
+
+  $('input[name="datefilter"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          cancelLabel: 'Clear'
+      }
+  });
+
+  $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+      var startDate= picker.startDate
+      var endDate = picker.endDate
+    
+      $.ajax({
+        method:'post',
+        
+        url:"/admin/salesReport-date",
+        data:{
+          startDate:String(startDate),
+          endDate:String(endDate)
+        },
+        
+        success:function(date){
+          window.location.replace('/admin/salesreport')
+         
+        }
+      })
+  });
+
+  $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
+
+});
+
+
+
+
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $('tr').each(function()
+        {
+            var totmarks=1
+            $(this).find('.subjects').each(function()
+            {
+                var marks=$(this).text();
+                if(marks.length!==0)
+                {
+                    totmarks=totmarks * parseFloat(marks)
+                }
+            })
+            $(this).find('#total').html(totmarks)
+        })
+    }
+    )
+
+
+
+    //date
+    date = document.getElementById('date')
+    var time1 = document.getElementById('time')
+    var today = new Date();
+var year = today.getFullYear();
+var mes = today.getMonth()+1;
+var dia = today.getDate();
+var time = today.getTime();
+const goodTime = `${new Date().getHours()}:${new Date().getMinutes()}`;
+var twelve = new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })
+console.log(twelve)
+    date.innerText="Date:"+dia+'/'+mes+'/'+year
+    time1.innerText="Time:"+twelve
+
+
+badge = document.getElementById('badge')
+console.log(badge)
+badge.innerText="Top sale"
+badge.classList.add('bg-success')
+    
+</script>
+
+
+
+<style>
+    table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table h1 {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table h1 {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+    width: 95%;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* general styling */
+body {
+    margin-top: 10%;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+@media(max-width:676px)
+{
+    body{
+        margin-top: 30%;
+    }
+}
+</style>
+
+<script>
+    function generatePDF(){
+
+        const element = document.getElementById('table')
+        
+        html2pdf()
+        .from(element)
+        .save()
+        
+        
+    }
+</script>

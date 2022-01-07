@@ -1,0 +1,520 @@
+
+<section class="add-product ">
+    <div class="container mt-4 pb-5">
+        <div class="row d-flex justify-content-center mt-md-5 ">
+
+            <div class="col-md-6 bannerimage">
+                <h2 style="margin-left: -120px;" class="text-center mt-4 mb-4">Add Banner</h2>
+                <form class="" action="/admin/add-banner" method="post" onsubmit="return bannervalidate()" enctype="multipart/form-data">
+                   <p id="message" class="text-danger"></p>
+                    <div class="row">
+                        <div class="col-12 d-flex">
+                            {{!-- <label for="">Banner Name</label> --}}
+                    {{!-- <input type="text" id="brandName" name="bannerName" class="form-control w-75"> --}}
+    
+                    <label class="me-3" for="">Main Banner 1</label>
+                    <input type="file" name="image1" class="form-control w-50 image1">
+                    <img  class="mx-5" height="40em" width="220em"  id="imgview1" src="https://menaiortho.com.au/wp-content/uploads/2015/03/banner-placeholder.jpg" alt="">  
+                        </div>
+
+                        <div class="col-12 d-flex mt-5">
+                           
+    
+                    <label class="me-3" for="">Main Banner 2</label>
+                    <input type="file" name="image2" class="form-control w-50 image2">
+                    <img class="mx-5" height="40em" width="220em" id="imgview2" src="https://menaiortho.com.au/wp-content/uploads/2015/03/banner-placeholder.jpg" alt="">  
+                        </div>
+
+
+                        <div class="col-12 d-flex mt-5">
+                           
+    
+                    <label class="me-3" for="">Main Banner 3</label>
+                    <input type="file" name="image3" class="form-control w-50 image3">
+                    <img class="mx-5" height="40em" width="220em" id="imgview3" src="https://menaiortho.com.au/wp-content/uploads/2015/03/banner-placeholder.jpg" alt="">  
+                        </div>
+
+
+                    </div>
+                    <p class="text-danger" id="message"></p>
+                    
+                    
+                    <button id="button" style="width: 5em; height:2em" type="submit" class="btn btn-success mt-4">Submit</button>
+                    </div>
+                   
+                    <!--in case of file uploading use in above form as enctype="multipart/form-data" -->
+                    
+    
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{{!-- crop --}}
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop image</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="row">
+                                <div class="col-md-8">  
+                                    <!--  default image where we will set the src via jquery-->
+                                    <img id="image1" class="croppImage">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- modal 2 croppin --}}
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop image2</h5>
+                        <button type="button" class="close" data-dismiss="modal1" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="row">
+                                <div class="col-md-8">  
+                                    <!--  default image where we will set the src via jquery-->
+                                    <img id="image2">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop1">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- modal 3 --}}
+        <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop image3</h5>
+                        <button type="button" class="close" data-dismiss="modal3" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="row">
+                                <div class="col-md-8">  
+                                    <!--  default image where we will set the src via jquery-->
+                                    <img id="image3">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop3">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<script>
+
+  var bs_modal = $('#modal');
+    var image1 = document.getElementById('image1');
+    
+    var cropper,reader,file;
+   var base64data
+
+    $("body").on("change", ".image1", function(e) {
+        var files = e.target.files;
+        var done = function(url) {
+            image1.src = url;
+ 
+
+         
+            var fname = e.target.files[0].name;
+            var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+if (!re.exec(fname)) {
+  alert("File extension not supported!");
+}
+else{
+    bs_modal.modal('show');
+
+}
+           
+        
+
+            
+            
+        };
+
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    bs_modal.on('shown.bs.modal', function() {
+        cropper = new Cropper(image1, {
+            aspectRatio: 5/2,
+            viewMode: 3,
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    $("#crop").click(function() {
+        canvas = cropper.getCroppedCanvas({
+    minWidth: 256,
+     minHeight: 256,
+     maxWidth: 4096,
+     maxHeight: 4096,
+     fillColor: '#fff',
+     imageSmoothingEnabled: true,
+     imageSmoothingQuality: 'high'
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+             bs_modal.modal('hide');
+            document.getElementById('imgview1').src=url
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+            base64data = reader.result;
+
+               
+            };
+        });
+    });
+ </script>
+ <script>
+
+    //second image
+
+     var bs_modal1 = $('#modal1');
+    var image2 = document.getElementById('image2');
+    
+    var cropper,reader,file;
+   var base64data2
+
+    $("body").on("change", ".image2", function(e) {
+        var files = e.target.files;
+        var done = function(url) {
+            image2.src = url;
+ 
+
+         
+            var fname = e.target.files[0].name;
+            var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+if (!re.exec(fname)) {
+  alert("File extension not supported!");
+}
+else{
+    bs_modal1.modal('show');
+
+}
+           
+        
+
+            
+            
+        };
+
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    bs_modal1.on('shown.bs.modal', function() {
+        cropper = new Cropper(image2, {
+            aspectRatio: 5/2,
+            viewMode: 3,
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    $("#crop1").click(function() {
+        canvas = cropper.getCroppedCanvas({
+        minWidth: 256,
+     minHeight: 256,
+     maxWidth: 4096,
+     maxHeight: 4096,
+     fillColor: '#fff',
+     imageSmoothingEnabled: true,
+     imageSmoothingQuality: 'high'
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+             bs_modal1.modal('hide');
+           document.getElementById('imgview2').src=url
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+            base64data2 = reader.result;
+
+               
+            };
+        });
+    });
+
+
+
+
+
+
+
+     
+
+</script>
+{{!-- crop 3 --}}
+<script>
+
+    //third image
+
+     var bs_modal3 = $('#modal3');
+    var image3 = document.getElementById('image3');
+    
+    var cropper,reader,file;
+   var base64data3
+
+    $("body").on("change", ".image3", function(e) {
+        var files = e.target.files;
+        var done = function(url) {
+            image3.src = url;
+ 
+
+         
+            var fname = e.target.files[0].name;
+            var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+if (!re.exec(fname)) {
+  alert("File extension not supported!");
+}
+else{
+    bs_modal3.modal('show');
+
+}
+           
+        
+
+            
+            
+        };
+
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    bs_modal3.on('shown.bs.modal', function() {
+        cropper = new Cropper(image3, {
+            aspectRatio: 5/2,
+            viewMode: 3,
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    $("#crop3").click(function() {
+        canvas = cropper.getCroppedCanvas({
+            minWidth: 256,
+     minHeight: 256,
+     maxWidth: 4096,
+     maxHeight: 4096,
+     fillColor: '#fff',
+     imageSmoothingEnabled: true,
+     imageSmoothingQuality: 'high'
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+             bs_modal3.modal('hide');
+           document.getElementById('imgview3').src=url
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+            base64data3 = reader.result;
+
+               
+            };
+        });
+    });
+
+</script>
+
+
+
+
+
+
+<script>
+
+    
+    $('#button').click(function(e){
+        var view1 = document.getElementById('imgview1')
+    var view2 = document.getElementById('imgview2')
+    var view3 = document.getElementById('imgview3')
+    var view4 = document.getElementById('imgview4')
+    var name = 
+        
+         e.preventDefault();
+        if(view1.src=='https://menaiortho.com.au/wp-content/uploads/2015/03/banner-placeholder.jpg'|| view2.src=='https://menaiortho.com.au/wp-content/uploads/2015/03/banner-placeholder.jpg'||view3.src=='https://menaiortho.com.au/wp-content/uploads/2015/03/banner-placeholder.jpg')
+        {
+            document.getElementById('message').innerHTML="please fill the field"
+        }
+        else{
+
+        
+       
+        $.ajax({
+                    method: "POST",
+                    dataType: "json",
+                    url: "/admin/add-banner",
+                    data: {image1: base64data,
+                            image2:base64data2,
+                            image3:base64data3,
+                            name:"mainbanner"
+                            
+
+                    
+                    },
+                    success: function(data) { 
+                       
+                        
+                        location.href='/admin/banner'
+                    }
+                });
+
+    }
+
+    })
+
+     
+
+</script>
+
+
+
+
+
+
+<script>
+    function viewImage(){
+        document.getElementById('imgview').src=URL.createObjectURL(event.target.files[0])
+        
+
+    }
+    function viewImage2(){
+        document.getElementById('imgview2').src=URL.createObjectURL(event.target.files[0])
+        
+
+    }
+    function viewImage3(){
+        document.getElementById('imgview3').src=URL.createObjectURL(event.target.files[0])
+        
+
+    }
+</script>
+
+<script>
+    var username = document.getElementById('brandName');  
+    function bannervalidate(){ 
+        
+        if(username.value.trim()=="")
+        {   
+      document.getElementById('message').innerHTML="brand name cannot be empty"
+      return false; 
+        }
+        else{
+            return true
+        }
+    }
+</script>
+
+<style>
+     img {
+         
+            display: block;
+            max-width: 100%;
+        }
+        .preview {
+            overflow: hidden;
+            width: 130px; 
+            height: 130px;
+            margin: 10px;
+            border: 1px solid red;
+        }   
+        .croppImage{
+            width: 1120;
+        }
+</style>

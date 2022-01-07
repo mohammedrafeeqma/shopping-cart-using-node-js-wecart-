@@ -1,0 +1,540 @@
+
+<section class="cart-view">
+    {{#if cartproducts}}
+    <div class="container-fluid">
+        
+    <div class="row">
+        <aside class="col-lg-9">
+            <div class="card">
+                
+                <div class="table-responsive">
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            
+                            <tr class="small text-uppercase">
+                                <th scope="col">Product</th>
+                                <th scope="col" width="120">Quantity</th>
+                                <th scope="col" width="120">Price</th>
+                                <th scope="col" class="text-right d-none d-md-block" width="200"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            
+                            {{#each cartproducts}}
+                            
+                            <tr>
+                                
+                                
+                                <td class="m-0 p-0 m-md-1 p-md-1">
+                                    <figure class="itemside align-items-center">
+                                        <div class="aside"> <img id="cartimage" src="/images/product-images/{{this.product._id}}_1.png" class="img-sm"></div>
+                                        <figcaption class="info"> <a id="content" href="#" class="title text-dark" data-abc="true">{{this.product.Name}}</a>
+                                            <p class="text-muted small">SIZE: {{this.size}} <br> Brand: {{this.product.brand}}</p>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+
+                                <td class="m-0 md-1 p-md-1 p-0">
+                                    <div class="d-md-flex ">
+                                         <button class=" btn-secondary cart-item-count me-md-2 p-0 p-md-1" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+                                    <span class="mt-2" id="{{this.product._id}}">{{this.quantity}}</span>
+                                    <button class=" btn-secondary cart-item-count ms-0 ms-md-2 p-0 p-md-1 " onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
+                                    </div>
+                                   
+                                </td>
+                                
+                
+                                <td class="m-0 p-0">
+                                    <div class="price-wrap"> <var class="price">₹ {{this.product.offerprice}}</var>
+                                     <small class="text-muted"> <span class="text-danger" id="{{this.product._id}}1">{{this.subtotal}}</span></small> 
+                                     </div>
+                                </td>
+                            
+
+                                <td>
+                                <button value="{{this.product._id}}"  type="button" class="btn btn-outline-danger delete btn-sm m-0 p-0 m-md-1 p-md-2" data-bs-toggle="modal" data-bs-target="#myModal">Remove</button>
+                                
+                                </td>
+                            </tr>
+
+
+                            {{!-- delete custom window --}}
+                            <section>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+          <a href="/remove-item/{{this.product._id}}" class="btn text-white confirm" data-abc="true">Confirm</a> </td>
+        
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+
+                            
+                            {{/each}}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </aside>
+        <aside class="col-lg-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form>
+                        <p class="message" id="message"></p>
+                        <div class="form-group"> <label>Have coupon?</label>
+                            <div class="input-group">
+                                 <input id="coupon" type="text" class="form-control coupon" name="coupon" placeholder="Coupon code"> <span class="input-group-append">
+                                      <button id="button" type="submit" class="btn btn-primary btn-apply coupon p-2 pt-2">Apply</button> </span> </div>
+                        </div>
+                        <p id="couponmsg" class="success"></p>
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <dl class="dlist-align">
+                        <dt>Total price:</dt>
+                        <dd class="text-right ml-3"> Rs.<span id="total">{{total}}</span> </dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt>Discount:</dt>
+                        <dd id="discount" class="text-right text-success ml-3">- ₹00.00</dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt >Total: </dt>
+                        <dd class="text-right text-dark b ml-3"><strong> <span id="total1">{{total}}</span> </strong></dd>
+                    </dl>
+                    <hr> <a href="/make-purchase" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a> <a href="#" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+{{else}}
+<div class="container-fluid mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Cart</h5>
+                </div>
+                <div class="card-body cart">
+                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://www.svgrepo.com/show/17356/empty-cart.svg" width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <h3><strong>Your Cart is Empty</strong></h3>
+                        <h4>Add something to make me happy :)</h4> <a href="/" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+</section>
+
+<script>
+	$(document).on("click", ".delete", function () {
+     var value = $(this).val();
+  console.log("value : ", $(this).val())
+
+   $(".modal-dialog .confirm").attr("href","/remove-item/"+value)
+});
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+
+    
+
+ /*  hide element with dot after width */
+ #content{
+overflow: hidden;
+width:300px;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+}
+
+    @media(max-width: 480px) {
+        #content{
+overflow: hidden;
+width:50px;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+}
+
+#cartimage{
+    width: 4em;
+    height: 4em;
+}
+  body {
+     margin: 0;
+     padding: 0;
+  }
+}
+  .modal-confirm {		
+	color: #636363;
+	width: 400px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -10px;
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -2px;
+}
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;		
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}		
+.modal-confirm .icon-box {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	border-radius: 50%;
+	z-index: 9;
+	text-align: center;
+	border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i {
+	color: #f15e5e;
+	font-size: 46px;
+	display: inline-block;
+	margin-top: 13px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #60c7c1;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+	background: #c1c1c1;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+} 
+
+
+
+
+
+
+
+
+.cart-view .container-fluid {
+    background-color: #ecf0f3;
+    font-family: 'Open Sans', serif;
+    font-size: 14px;
+    padding: 5%;
+    margin-top: 10%
+}
+@media(max-width: 680px) {
+  .cart-view .container-fluid {
+     margin-top: 35%;
+  }
+}
+.cart-view .card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.40rem
+}
+
+.cart-view .img-sm {
+    width: 80px;
+    height: 80px
+}
+
+.cart-view .itemside .info {
+    padding-left: 15px;
+    padding-right: 7px
+}
+
+.cart-view .table-shopping-cart .price-wrap {
+    line-height: 1.2
+}
+
+.cart-view .table-shopping-cart .price {
+    font-weight: bold;
+    margin-right: 5px;
+    display: block
+}
+
+.cart-view .text-muted {
+    color: #969696 !important
+}
+
+.cart-view a {
+    text-decoration: none !important
+}
+
+.cart-view .card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0px
+}
+
+.cart-view .itemside {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%
+}
+
+.cart-view .dlist-align {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+[class*="dlist-"] {
+    margin-bottom: 5px
+}
+
+.cart-view .coupon {
+    border-radius: 1px
+}
+
+.cart-view .price {
+    font-weight: 600;
+    color: #212529
+}
+
+.cart-view .btn.btn-out {
+    outline: 1px solid #fff;
+    outline-offset: -5px
+}
+
+.cart-view .btn-main {
+    border-radius: 2px;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 10px 19px;
+    cursor: pointer;
+    color: #fff;
+    width: 100%
+}
+
+.cart-view .btn-light {
+    color: #ffffff;
+    background-color: #F44336;
+    border-color: #f8f9fa;
+    font-size: 12px
+}
+
+.cart-view .btn-light:hover {
+    color: #ffffff;
+    background-color: #F44336;
+    border-color: #F44336
+}
+
+.cart-view .btn-apply {
+    font-size: 11px
+}
+</style>
+
+<script>
+    
+    
+    function changeQuantity(cartId,prodId,count){
+        let quantity = parseInt(document.getElementById(prodId).innerHTML)
+        count = parseInt(count)
+        
+        $.ajax({
+            url:'/change-product-quantity',
+            data:{
+                
+                cart:cartId,
+                product:prodId,
+                count:count,
+                quantity:quantity
+                
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.removeProduct){
+                    
+                    var bs_myModal2 = $('#myModal2');
+                    bs_myModal2.modal('show').then(()=>{
+                        location.reload()
+                    })
+                    
+                    //confirm("Product Removed from cart")
+                    //location.reload()
+                }else{
+                    
+                    productQuantity = document.getElementById(prodId).innerHTML
+                    console.log(productQuantity)
+                    if(productQuantity>=10 && count=='1')
+                    {
+                        console.log("cannot increment")
+                        return false
+                    }
+                    document.getElementById(prodId).innerHTML=quantity+count
+                    document.getElementById(prodId+"1").innerHTML="Subtotal ₹:"+response.subtotal
+                    document.getElementById('total').innerHTML=response.total
+                     document.getElementById('total1').innerHTML=response.total
+                    
+                }
+            }
+        })
+    }
+
+    
+</script>
+
+<script>
+    $('#button').click(function(e){
+        var coupon = document.getElementById('coupon').value
+         e.preventDefault();
+        if(coupon=='')
+        {
+            document.getElementById('message').innerHTML="please fill the field"
+        }
+        else{
+
+        
+       
+        $.ajax({
+                    method: "POST",
+                    url: "/coupon",
+                    data: {
+                        coupon:coupon
+                          },
+                    success: function(data) { 
+                       console.log(data)
+                       if(data)
+                       {
+                           let totalprice=document.getElementById('total').innerHTML
+                           let total=document.getElementById('total1')
+                           var grandtotal = parseInt(totalprice) * (parseInt(data.discount)/100)
+                           let discount = parseInt(totalprice)-parseInt(grandtotal)
+                           discount=~~discount;
+                            total.innerHTML="Rs. "+discount
+                            grandtotal=~~grandtotal
+                           console.log(grandtotal)
+                           document.getElementById('discount').innerHTML="Rs. "+grandtotal
+                           document.getElementById('couponmsg').style.color="green"
+                           document.getElementById('couponmsg').innerHTML="Coupon applied"
+                       }
+                       else{
+                            document.getElementById('couponmsg').style.color="red"
+                           document.getElementById('couponmsg').innerHTML="Invalid coupon"
+                       }
+                        
+                        
+                    }
+                });
+
+    }
+
+    })
+</script>
+
+<section class="modalcustomconfirmation">
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal2">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+		  
+		  
+       <a href="" class="btn btn-outline-danger confirm">Confirm</a>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>

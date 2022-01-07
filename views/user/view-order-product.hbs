@@ -1,0 +1,341 @@
+
+
+<div class="card margintop">
+    <div class="w-100">
+         <h5 class="card-header">Order History</h5>
+    </div>
+
+    {{#if products.order}}
+    <div class="d-inline d-flex justify-content-end">
+             <button onclick="generatePDF()" class="btn btn-secondary btn-sm mt-3 me-3 ">Download Invoice</button>
+         </div>
+    {{else}}
+    
+    {{/if}}
+ 
+    <div class="row">
+        <div class="col-12 col-md-8">
+             <div class="card-body">
+    <h6 class="card-title">Order No. <span class="text-muted fw-3">{{products._id}}</span> </h6>
+    <h5 class="card-title">Billed To:</h5>
+    <p class="card-text"><span class="text-muted fw-3">{{products.billingAddress.address.username}}</span></p>
+    <p class="card-text"><span class="text-muted fw-3">{{products.billingAddress.address.mobile}}</span></p>
+    <p class="card-text"><span class="text-muted fw-3">{{products.billingAddress.address.address}}</span></p>
+    <p class="mt-0 pt-0"><span class="text-muted fw-3"> {{products.billingAddress.address.city}}  {{ products.billingAddress.address.pincode}}</span></p>
+    <p class=""><span class="text-muted fw-3">{{products.billingAddress.address.email}}</span></p>
+    
+    </div>
+        </div>
+
+
+        <div class="col-12 col-md-4">
+             <div class="card-body">
+    <h6 class="card-title">Order Date. <span class="text-muted fw-3" id="date">{{ products.orderDate}}</span></h6>
+    <h5 class="card-title">Shipped To:</h5>
+    <p class="card-text">{{products.deliveryaddress.address.username}}</p>
+    <p class="card-text">{{products.deliveryaddress.address.mobile}}</p>
+    <p class="mt-0 pt-0">{{products.deliveryaddress.address.address}}</p>
+    <p class="mt-0 pt-0"><span class="text-muted fw-3"> {{products.deliveryaddress.address.city}}  {{ products.deliveryaddress.address.pincode}}</span></p>
+    <p class="">{{products.deliveryaddress.address.email}}</p>
+    
+    </div>
+        </div>
+    </div>
+</div>
+{{#if products.order}}
+<p class="d-none" id="prbar">{{products.order_status}}</p>
+<div class="row px-3">
+             
+            <div class="col">
+                <ul id="progressbar">
+                   
+                    <li class="step0" id="step1">Dispatched</li>
+                    <li class="step0  text-center" id="step2">Shipped</li>
+                    <li class="step0  text-muted text-end" id="step3">Delivered</li>
+                </ul>
+            </div>
+        </div>
+
+    <p class="ms-4">your item has been {{products.order_status}}</p>
+{{else}}
+<p class="text-danger mt-4">your order is cancelled</p>
+{{!-- <img class="  " width="100" height="100" style="z-index: 1;" src="/images/ordercancel.png" alt=""> --}}
+{{/if}}
+
+<div class="card" style="margin-top: 3%;">
+  <h5 class="card-header">Order History{{subtotal}}</h5>
+  <div class="hscroll">
+    <table width="100%" border="1" cellspacing="0" cellpadding="0"  class="card-table table">
+    <thead>
+      {{#each products.products}}
+      <tr class="text center">
+        <th>                <a href="/product-view/{{this.item}}" class="image">
+                    <img height="50" width="50" class="pic-1" src="/images/product-images/{{this.item}}_1.png">
+                </a></th>
+        <th  scope="col">Item: <span class="text-muted fw-3" style="font-weight: 100;">{{this.name}}</span></th>
+        <th scope="col">Size: <span class="text-muted fw-3" style="font-weight: 100;">{{this.size}}</span></th>
+        <th scope="col">Quantity: <span class="text-muted fw-3" style="font-weight: 100;">{{this.quantity}}</span> </th>
+        <th scope="col">Price: <del> <span class="text-muted fw-3" style="font-weight: 100;">{{this.price}}</span></del> {{this.offerprice}}</th>
+        
+      </tr>
+     {{/each}}
+    </thead>
+</table>
+<p class="d-flex justify-content-end me-5">Total:<span>{{products.total}}</span></p>
+<p class="d-flex justify-content-end me-5 ">Discount:<span>{{products.discount}}</span></p>
+<p class="d-flex justify-content-end me-5 fw-bold">Grand Total:<span>{{products.grandtotal}}</span></p>
+  </div>
+</div>
+
+<script>
+    date = document.getElementById('date')
+    date1 = date.innerHTML
+    date1 =date1.split("GMT")[0]
+    date.innerHTML=date1
+    console.log(date)
+</script>
+<style>
+    .margintop{
+        margin-top: 10%;
+        line-height: 0.6;
+    }
+    @media(max-width:676px){
+        .margintop{
+            margin-top: 20%;
+        }
+    }
+
+    .hscroll {
+  overflow-x: auto; /* Horizontal */
+}
+    span{
+         style="font-weight: 100;
+    }
+
+
+
+    #progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #455A64;
+    padding-left: 0px;
+    margin-top: 30px
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 13px;
+    width: 33.33%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: #455A64 !important
+}
+
+#progressbar #step1:before {
+    content: "1";
+    color: #fff;
+    width: 29px;
+    margin-left: 15px !important;
+    padding-left: 11px !important
+}
+
+#progressbar #step2:before {
+    content: "2";
+    color: #fff;
+    width: 29px
+}
+
+#progressbar #step3:before {
+    content: "3";
+    padding-left: 8px;
+    text-align: center;
+    color: #fff;
+    width: 29px;
+    margin-right: 15px !important;
+    padding-right: 11px !important
+}
+
+#progressbar li:before {
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #455A64;
+    border-radius: 50%;
+    margin: auto
+}
+
+#progressbar li:after {
+    content: '';
+    width: 121%;
+    height: 2px;
+    background: #455A64;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 15px;
+    z-index: -1
+}
+
+#progressbar li:nth-child(2):after {
+    left: 50%
+}
+
+#progressbar li:nth-child(1):after {
+    left: 10%;
+    width: 171%
+}
+
+#progressbar li:nth-child(3):after {
+    left: 45% !important;
+    width: 44% !important
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #26A541
+}
+</style>
+
+<script>
+  var prbar = document.getElementById('prbar').innerHTML
+  var step1 = document.getElementById('step1')
+  var step2 = document.getElementById('step2')
+  var step3 = document.getElementById('step3')
+  console.log(prbar)
+  if(prbar=="dispatched")
+  {
+    step1.classList.add('active')
+    
+  }
+  else if(prbar=="shipped")
+  {
+    step1.classList.add('active')
+    step2.classList.add('active')
+  }
+  else if(prbar=="delivered")
+  {
+    step1.classList.add('active')
+    step2.classList.add('active')
+    step3.classList.add('active')
+   
+
+  }
+
+</script>
+
+
+
+
+{{!-- invoice --}}
+
+<div id="invoice" class="w-100" style="display: none;">
+    <div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="text-left logo p-2 px-5"><a style="text-decoration: none;" class="text-dark fw-bold " href="#">WE <span style="color: #0f9ceb;">Cart</span> </a> </div>
+                <div class="invoice p-5">
+                    <h5>Your order Confirmed!</h5> <span class="font-weight-bold d-block mt-4">Hello, {{products.billingAddress.address.username}}</span> <span>You order has been confirmed and will be shipped in next two days!</span>
+                    <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="py-2"> <span class="d-block text-muted">Order Date</span> <span>{{products.orderDate}}</span> </div>
+                                    </td>
+                                    <td>
+                                        <div class="py-2"> <span class="d-block text-muted">Order No</span> <span>{{products._id}}</span> </div>
+                                    </td>
+                                    <td>
+                                        <div class="py-2"> <span class="d-block text-muted">Payment</span> <span>{{products.paymentMethod}}</span> </div>
+                                    </td>
+                                    <td>
+                                        <div class="py-2"> <span class="d-block text-muted">Shiping Address</span> <span>{{products.deliveryaddress.address.username}}, {{products.deliveryaddress.address.address}},{{products.deliveryaddress.address.state}}</span> </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="product border-bottom table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                {{#each products.products}}
+                                <tr>
+                                    <td width="20%"> <img src="/images/product-images/{{this.item}}_1.png" width="90"> </td>
+                                    <td width="60%"> <span class="font-weight-bold">{{this.name}}</span>
+                                        <div class="product-qty"> <span class="d-block">Quantity:{{this.quantity}}</span> <span>Size:{{this.size}}</span> </div>
+                                    </td>
+                                    <td width="20%">
+                                        <div class="text-right"> <span class="font-weight-bold">₹{{this.price}}</span> </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class="col-md-5">
+                            <table class="table table-borderless">
+                                <tbody class="totals">
+                                    <tr>
+                                        <td>
+                                            <div class="text-left"> <span class="text-muted">Subtotal</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right"> <span>₹{{products.total}}</span> </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="text-left"> <span class="text-muted">Shipping Fee</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right"> <span>Free</span> </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <div class="text-left"> <span class="text-muted">Discount</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right"> <span class="text-success">₹{{products.discount}}</span> </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-top border-bottom">
+                                        <td>
+                                            <div class="text-left"> <span class="font-weight-bold">Subtotal</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right"> <span class="font-weight-bold">{{products.grandtotal}}</span> </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p>We will be sending shipping confirmation email when the item shipped successfully!</p>
+                    <p class="font-weight-bold mb-0">Thanks for shopping with us!</p> <span>WeCart Team</span>
+                </div>
+                <div class="d-flex justify-content-between footer p-3"> <span>Need Help? visit our <a href="#"> help center</a></span> <span>{{products.orderDate}}</span> </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    function generatePDF(){
+
+        const element = document.getElementById('invoice')
+        element.style.display="block"
+        html2pdf()
+        .from(element)
+        .save().then(()=>{
+            element.style.display="none"
+        })
+        
+        
+    }
+</script>

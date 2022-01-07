@@ -1,0 +1,991 @@
+<section class="w-100 mainsection">
+    <div class="container mt-5 mb-5">
+    <div class="row d-flex">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="row ">
+                    <div class="col-md-6">
+                        {{!-- product zoom --}}
+                        <div style="z-index: 1;" class="show" href="/images/product-images/{{products._id}}_1.png">
+    <img src="/images/product-images/{{products._id}}_1.png"  id="show-img">
+  </div>
+  <div class="small-img">
+    <img src="/images/online_icon_right@2x.png" class="icon-left" alt="" id="prev-img">
+    <div class="small-container">
+      <div id="small-img-roll">
+        <img src="/images/product-images/{{products._id}}_1.png" class="show-small-img" alt="">
+        <img src="/images/product-images/{{products._id}}_2.png" class="show-small-img" alt="">
+        <img src="/images/product-images/{{products._id}}_3.png" class="show-small-img" alt="">
+        <img src="/images/product-images/{{products._id}}_4.png" class="show-small-img" alt="">
+        
+      </div>
+    </div>
+    <img src="/images/online_icon_right@2x.png" class="icon-right" alt="" id="next-img">
+  </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product p-4">
+                            {{!--  --}}
+                <div class="m-0">
+    <ul class="nav nav-tabs product-tab" id="myTab">
+        <li class="nav-item">
+            <a href="#home" class="nav-link active  " data-bs-toggle="tab">DESCRIPTION</a>
+        </li>
+        <li class="nav-item">
+            <a href="#profile" class="nav-link " data-bs-toggle="tab"></a>
+        </li>
+        <li class="nav-item">
+            <a href="#messages" class="nav-link" data-bs-toggle="tab"></a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade " id="home">
+            <div class="col-md-12">
+                        <div class="product p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
+                            </div>
+                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">{{products.brand}}</span>
+                                <h5 class="text-uppercase">{{products.Name}}</h5>
+                                <div class="price d-flex flex-row align-items-center"> <span class="act-price">₹ {{products.offerprice}}&nbsp;&nbsp; </span>  <del> <span class=" text-secondary" style="font-size: 18px; font-weight: 100;"></span><span class="price text-secondary" style="font-size: 16px; font-weight: 100;"> ₹{{products.price}} </span> </del> <span style="font-size: 16px;" class="text-success">&nbsp; {{products.offer}}% off</span>
+                                    {{!-- <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div> --}}
+                                </div>
+                            </div>
+                            <p class="about">{{products.description}}</p>
+                            <div class="sizes mt-5">
+                                <h6 class="text-uppercase">Size</h6> 
+                                <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span>
+                                 </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> 
+                                 </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> 
+                                 </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span>
+                                  </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span>
+                                   </label>
+                            </div>
+                            <div class="cart mt-4 align-items-center">
+                                 <button   onclick="addToCart('{{products._id}}')" class="btn btn-danger text-uppercase my-2 mr-2 px-4">Add to cart</button>
+                                 <button  onclick="addToCart('{{products._id}}')" href="#" style="background-color: #fb641b;"  class="btn text-uppercase text-white mr-2 px-4 " >Buy Now</button>
+                                 
+                                  <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
+                        </div>
+                    </div>
+        </div>
+        <div class="tab-pane fade show active" id="profile">
+            <h4 class="mt-2">Product details</h4>
+            <h6 class="mt-3" style="display: inline;">Name:</h6> <span class="text-muted">{{products.Name}}</span><br>
+            <h6 class="mt-5" style="display: inline;">Description:</h6> <span class="text-muted">{{products.description}}</span><br>
+            <h6 class="mt-5" style="display: inline;">Brand:</h6> <span class="text-muted">{{products.brand}}</span>
+        </div>
+        <div class="tab-pane fade" id="messages">
+            {{!-- <h4 class="mt-2">Messages tab content</h4> --}}
+            <div class="container">
+    <div id="reviews" class="review-section">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h4 class="m-0">13 Reviews</h4>
+            
+            
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="stars-counters">
+                    <tbody>
+                        <tr class="">
+                            <td>
+                                <span>
+                                    <button class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">5 Stars</button>
+                                </span>
+                            </td>
+                            <td class="progress-bar-container">
+                                <div class="fit-progressbar fit-progressbar-bar star-progress-bar">
+                                    <div class="fit-progressbar-background">
+                                        <span class="progress-fill" style="width: 97.2973%;"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="star-num">(13)</td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                <span>
+                                    <button class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">5 Stars</button>
+                                </span>
+                            </td>
+                            <td class="progress-bar-container">
+                                <div class="fit-progressbar fit-progressbar-bar star-progress-bar">
+                                    <div class="fit-progressbar-background">
+                                        <span class="progress-fill" style="width: 2.2973%;"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="star-num">(2)</td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                <span>
+                                    <button class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">5 Stars</button>
+                                </span>
+                            </td>
+                            <td class="progress-bar-container">
+                                <div class="fit-progressbar fit-progressbar-bar star-progress-bar">
+                                    <div class="fit-progressbar-background">
+                                        <span class="progress-fill" style="width: 0;"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="star-num">(0)</td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                <span>
+                                    <button class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">5 Stars</button>
+                                </span>
+                            </td>
+                            <td class="progress-bar-container">
+                                <div class="fit-progressbar fit-progressbar-bar star-progress-bar">
+                                    <div class="fit-progressbar-background">
+                                        <span class="progress-fill" style="width: 0;"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="star-num">(0)</td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                <span>
+                                    <button class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">5 Stars</button>
+                                </span>
+                            </td>
+                            <td class="progress-bar-container">
+                                <div class="fit-progressbar fit-progressbar-bar star-progress-bar">
+                                    <div class="fit-progressbar-background">
+                                        <span class="progress-fill" style="width: 0;"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="star-num">(0)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="review-list">
+        <ul>
+            <li>
+                <div class="d-flex">
+                    <div class="left">
+                        <span>
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="profile-pict-img img-fluid" alt="" />
+                        </span>
+                    </div>
+                    <div class="right">
+                        <h4>
+                            Askbootstrap
+                            <span class="gig-rating text-body-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
+                                    <path
+                                        fill="currentColor"
+                                        d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
+                                    ></path>
+                                </svg>
+                                5.0
+                            </span>
+                        </h4>
+                        {{!-- <div class="country d-flex align-items-center">
+                            <span>
+                                <img class="country-flag img-fluid" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
+                            </span>
+                            <div class="country-name font-accent">India</div>
+                        </div> --}}
+                        <div class="review-description">
+                            <p>
+                                The process was smooth, after providing the required info, Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
+                            </p>
+                        </div>
+                        <span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
+                        
+                        {{!-- <div class="response-item mt-4 d-flex">
+                            <div class="left">
+                                <span>
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="profile-pict-img img-fluid" alt="" />
+                                </span>
+                            </div>
+                            <div class="right">
+                                <h4>
+                                    Gurdeep Osahan
+                                    <span class="gig-rating text-body-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
+                                            <path
+                                                fill="currentColor"
+                                                d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
+                                            ></path>
+                                        </svg>
+                                        5.0
+                                    </span>
+                                </h4>
+                                <div class="country d-flex align-items-center">
+                                    <span>
+                                        <img class="country-flag img-fluid" src="https://bootdey.com/img/Content/avatar/avatar3.png" />
+                                    </span>
+                                    <div class="country-name font-accent">India</div>
+                                </div>
+                                <div class="review-description">
+                                    <p>
+                                        The process was smooth, after providing the required info, Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
+                                    </p>
+                                </div>
+                                <span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
+                            </div>
+                        </div> --}}
+                        {{!--  --}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+        </div>
+    </div>
+  	<hr>
+</div>
+                            {{!--  --}}
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+<script>
+    function addToCart(proId){
+        
+
+      var size = document.querySelector('input[name="size"]:checked').value;  
+      console.log(proId)
+    $.ajax({
+        url:'/add-to-cart/'+proId,
+        data:{
+            size:size
+
+        }
+        method:'get',
+        success:(response)=>{
+            console.log(response)
+            if(response.status){
+                let count = $('#cartcount').html()
+                count = parseInt(count)+1
+                $('#cartcount').html(count)
+
+            }
+            else{
+                location.href='/login'
+            }
+            
+        }
+    })
+}
+</script>
+<style>
+
+    {{!-- zoom display --}}
+  .show{
+  width: 400px;
+  height: 400px;
+}
+
+@media(max-width:767px){
+   .show{
+  width: 310px;
+}
+ 
+    
+  }
+
+#show-img { width: 400px !important; height: 400px;} 
+
+@media(max-width:767px){
+   #show-img { width: 332px !important; height: 400px;} 
+}
+
+
+
+.small-img{
+  width: 350px;
+  height: 70px;
+  margin-top: 10px;
+  position: relative;
+  left: 25px;
+}
+.small-img .icon-left, .small-img .icon-right{
+  width: 12px;
+  height: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+.small-img .icon-left{
+  transform: rotate(180deg)
+}
+.small-img .icon-right{
+  right: 0;
+}
+.small-img .icon-left:hover, .small-img .icon-right:hover{
+  opacity: .5;
+}
+.small-container{
+  width: 310px;
+  height: 70px;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.small-container div{
+  width: 800%;
+  position: relative;
+}
+
+.small-container .show-small-img{
+  width: 70px;
+  height: 70px;
+  margin-right: 6px;
+  cursor: pointer;
+  float: left;
+}
+.small-container .show-small-img:last-of-type{
+  margin-right: 0;
+}
+
+
+
+
+
+    .product-grid{
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    border: 1px solid #e7e7e7;
+}
+.product-grid .product-image{ position: relative; }
+.product-grid .product-image a.image{ display: block; }
+.product-grid .product-image img{
+    width: 100%;
+    height: auto;
+    transition: all 0.3s ease 0s;
+}
+.product-grid .product-image:hover img{ transform: translate(10px,-10px); }
+.product-grid .product-sale-label{
+    color: #fff;
+    background: #1abc9c;
+    font-size: 13px;
+    text-transform: capitalize;
+    line-height: 35px;
+    width: 55px;
+    height: 35px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    animation: bg-animate 5s infinite linear;
+}
+.product-grid .product-links{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+    transition: all 0.3s ease 0s;
+}
+.product-grid:hover .product-links{ opacity: 1; }
+.product-grid .product-links li{
+    margin: 0 0 5px;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 0.3s ease 0s;
+}
+.product-grid:hover .product-links li:nth-child(2){ transition: all 0.3s ease 0.15s; }
+.product-grid:hover .product-links li{
+    opacity: 1;
+    transform: translateX(0);
+}
+.product-grid .product-links li a{
+    color: #fff;
+    background-color: #00b894;
+    font-size: 14px;
+    text-shadow: 0 0 3px rgba(0,0,0,0.7);
+    padding: 8px 10px;
+    display: block;
+    opacity: 0.9;
+    transition: all 0.3s ease 0s;
+    animation: bg-animate 5s infinite linear;
+}
+.product-grid .product-links li a:hover{
+    color: #fff;
+    box-shadow: 0 0 0 3px #fff inset;
+    opacity: 1;
+}
+.product-grid .product-links li a i{ margin: 0 5px 0 0; }
+.product-grid .product-content{ padding: 15px 0 5px; }
+.product-grid .title{
+    font-size: 17px;
+    font-weight: 400;
+    text-transform: capitalize;
+    padding: 0 10px 14px;
+    margin: 0 0 7px;
+    border-bottom: 1px solid #dfe5e9;
+}
+.product-grid .title a{
+    color: #000;
+    transition: all 0.3s ease 0s;
+}
+.product-grid .title a:hover{ animation: color-animate 5s infinite linear; }
+.product-grid .price{
+    color: #1abc9c;
+    font-size: 20px;
+    font-weight: 400;
+    animation: color-animate 5s infinite linear;
+}
+.product-grid .price span{
+    color: #999;
+    text-decoration: line-through;
+    margin: 0 3px 0 0;
+}
+@keyframes color-animate{
+    0%{ color: #00b894; }
+    20%{ color: #00cec9; }
+    40%{ color: #0984e3; }
+    60%{ color: #6c5ce7; }
+    80%{ color: #e84393; }
+    100%{ color: #00b894; }
+}
+@keyframes bg-animate{
+    0%{ background-color: #00b894; }
+    20%{ background-color: #00cec9; }
+    40%{ background-color: #0984e3; }
+    60%{ background-color: #6c5ce7; }
+    80%{ background-color: #e84393; }
+    100%{ background-color: #00b894; }
+}
+@media screen and (max-width:1200px){
+    .product-grid{ margin: 0 0 30px; }
+}
+</style>
+
+{{!--tab options  --}}
+
+
+<script>
+$(document).ready(function(){
+    $("#myTab a").each(function(index, element){
+        new bootstrap.Tab(element);
+    })
+
+    $("#myBtn").click(function(){
+        var lastTab = bootstrap.Tab.getInstance($("#myTab a:last")[0]);
+        console.log(lastTab);
+        // {_element: a.nav-link}
+
+        $("#myTab a:last").tab("dispose");
+        console.log(lastTab);
+        // {_element: null}
+    });
+});
+</script>
+
+
+<style>
+body{margin-top:20px;
+width: 80%;
+
+
+}
+@media(max-width:767px){
+    body{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        
+        overflow-x: hidden !important;
+    }
+ 
+    
+  }
+
+.review-list ul li .left span {
+     width: 32px;
+     height: 32px;
+     display: inline-block;
+}
+ .review-list ul li .left {
+     flex: none;
+     max-width: none;
+     margin: 0 10px 0 0;
+}
+ .review-list ul li .left span img {
+     border-radius: 50%;
+}
+ .review-list ul li .right h4 {
+     font-size: 16px;
+     margin: 0;
+     display: flex;
+}
+ .review-list ul li .right h4 .gig-rating {
+     display: flex;
+     align-items: center;
+     margin-left: 10px;
+     color: #ffbf00;
+}
+ .review-list ul li .right h4 .gig-rating svg {
+     margin: 0 4px 0 0px;
+}
+ .country .country-flag {
+     width: 16px;
+     height: 16px;
+     vertical-align: text-bottom;
+     margin: 0 7px 0 0px;
+     border: 1px solid #fff;
+     border-radius: 50px;
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+ .country .country-name {
+     color: #95979d;
+     font-size: 13px;
+     font-weight: 600;
+}
+ .review-list ul li {
+     border-bottom: 1px solid #dadbdd;
+     padding: 0 0 30px;
+     margin: 0 0 30px;
+}
+ .review-list ul li .right {
+     flex: auto;
+}
+ .review-list ul li .review-description {
+     margin: 20px 0 0;
+}
+ .review-list ul li .review-description p {
+     font-size: 14px;
+     margin: 0;
+}
+ .review-list ul li .publish {
+     font-size: 13px;
+     color: #95979d;
+}
+
+.review-section h4 {
+     font-size: 20px;
+     color: #222325;
+     font-weight: 700;
+}
+ .review-section .stars-counters tr .stars-filter.fit-button {
+     padding: 6px;
+     border: none;
+     color: #4a73e8;
+     text-align: left;
+}
+ .review-section .fit-progressbar-bar .fit-progressbar-background {
+     position: relative;
+     height: 8px;
+     background: #efeff0;
+     -webkit-box-flex: 1;
+     -ms-flex-positive: 1;
+     flex-grow: 1;
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+     background-color: #ffffff;
+    ;
+     border-radius: 999px;
+}
+ .review-section .stars-counters tr .star-progress-bar .progress-fill {
+     background-color: #ffb33e;
+}
+ .review-section .fit-progressbar-bar .progress-fill {
+     background: #2cdd9b;
+     background-color: rgb(29, 191, 115);
+     height: 100%;
+     position: absolute;
+     left: 0;
+     z-index: 1;
+     border-radius: 999px;
+}
+ .review-section .fit-progressbar-bar {
+     display: flex;
+     align-items: center;
+}
+ .review-section .stars-counters td {
+     white-space: nowrap;
+}
+ .review-section .stars-counters tr .progress-bar-container {
+     width: 100%;
+     padding: 0 10px 0 6px;
+     margin: auto;
+}
+ .ranking h6 {
+     font-weight: 600;
+     padding-bottom: 16px;
+}
+ .ranking li {
+     display: flex;
+     justify-content: space-between;
+     color: #95979d;
+     padding-bottom: 8px;
+}
+ .review-section .stars-counters td.star-num {
+     color: #4a73e8;
+}
+ .ranking li>span {
+     color: #62646a;
+     white-space: nowrap;
+     margin-left: 12px;
+}
+ .review-section {
+     border-bottom: 1px solid #dadbdd;
+     padding-bottom: 24px;
+     margin-bottom: 34px;
+     padding-top: 64px;
+}
+ .review-section select, .review-section .select2-container {
+     width: 188px !important;
+     border-radius: 3px;
+}
+ul, ul li {
+    list-style: none;
+    margin: 0px;
+}
+.helpful-thumbs, .helpful-thumb {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    section {
+        padding: 5%;
+        
+        background-color: #ecf0f3;
+}
+
+@media(max-width: 680px){
+    section{
+        padding: 0;
+        margin: 0;
+        margin-top: 40%;
+        width: 100%;
+        object-fit: cover;
+        overflow-x: hidden;
+    }
+}
+.zoom:hover{
+    transform: scale(1.1);
+}
+@media(max-width: 680px) {
+  .margin-top: {
+      margin-top: 130px;
+  }
+}
+
+.product-tab{
+    font-size: 11px;
+}
+@media(max-width: 680px) {
+  .product-tab{
+    font-size: 8px;
+}
+}
+
+.product {
+    background-color: #eee
+}
+
+.brand {
+    font-size: 13px
+}
+
+.act-price {
+    color: red;
+    font-weight: 700
+}
+
+.dis-price {
+    text-decoration: line-through
+}
+
+.about {
+    font-size: 14px
+}
+
+.color {
+    margin-bottom: 10px
+}
+
+label.radio {
+    cursor: pointer
+}
+
+label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.radio span {
+    padding: 2px 9px;
+    border: 2px solid #ff0000;
+    display: inline-block;
+    color: #ff0000;
+    border-radius: 3px;
+    text-transform: uppercase
+}
+
+label.radio input:checked+span {
+    border-color: #ff0000;
+    background-color: #ff0000;
+    color: #fff
+}
+
+.btn-danger {
+    background-color: #ff0000 !important;
+    border-color: #ff0000 !important
+}
+
+.btn-danger:hover {
+    background-color: #da0606 !important;
+    border-color: #da0606 !important
+}
+
+.btn-danger:focus {
+    box-shadow: none
+}
+
+.cart i {
+    margin-right: 10px
+}
+</style>
+
+<script>
+    function change_image(image){
+
+var container = document.getElementById("main-image");
+
+container.src = image.src;
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function(event) {
+
+
+
+
+
+
+
+});
+</script>
+
+
+
+<script>
+    /**
+ * by MonsterDuang
+ */
+ ;(function($) {
+    /**
+     * 1, 缩略图大小和父容器大小一致
+     * 2, 父容器 href 属性为高清图片路径
+     */
+    $.fn.zoomImage = function(paras) {
+        /**
+         * 默认参数
+         */
+        var defaultParas = {
+            layerW: 100, // 遮罩宽度
+            layerH: 100, // 遮罩高度
+            layerOpacity: 0.2, // 遮罩透明度
+            layerBgc: '#000', // 遮罩背景颜色
+            showPanelW: 500, // 显示放大区域宽
+            showPanelH: 500, // 显示放大区域高
+            marginL: 5, // 放大区域离缩略图右侧距离
+            marginT: 0 // 放大区域离缩略图上侧距离
+        };
+
+        paras = $.extend({}, defaultParas, paras);
+
+        $(this).each(function() {
+            var self = $(this).css({position: 'relative'});
+            var selfOffset = self.offset();
+            var imageW = self.width(); // 图片高度
+            var imageH = self.height();
+
+            self.find('img').css({
+                width: '100%',
+                height: '100%'
+            });
+
+            // 宽放大倍数
+            var wTimes = paras.showPanelW / paras.layerW;
+            // 高放大倍数
+            var hTimes = paras.showPanelH / paras.layerH;
+
+            // 放大图片
+            var img = $('<img>').attr('src', self.attr("href")).css({
+                position: 'absolute',
+                left: '0',
+                top: '0',
+                width: imageW * wTimes,
+                height: imageH * hTimes
+            }).attr('id', 'big-img');
+
+            // 遮罩
+            var layer = $('<div>').css({
+                display: 'none',
+                position: 'absolute',
+                left: '0',
+                top: '0',
+                backgroundColor: paras.layerBgc,
+                width: paras.layerW,
+                height: paras.layerH,
+                opacity: paras.layerOpacity,
+                border: '1px solid #ccc',
+                cursor: 'crosshair'
+            });
+
+            // 放大区域
+            var showPanel = $('<div>').css({
+                display: 'none',
+                position: 'absolute',
+                overflow: 'hidden',
+                left: imageW + paras.marginL,
+                top: paras.marginT,
+                width: paras.showPanelW,
+                height: paras.showPanelH
+            }).append(img);
+
+            self.append(layer).append(showPanel);
+
+            self.on('mousemove', function(e) {
+                // 鼠标相对于缩略图容器的坐标
+                var x = e.pageX - selfOffset.left;
+                var y = e.pageY - selfOffset.top;
+
+                if(x <= paras.layerW / 2) {
+                    x = 0;
+                }else if(x >= imageW - paras.layerW / 2) {
+                    x = imageW - paras.layerW;
+                }else {
+                    x = x - paras.layerW / 2;
+                }
+
+                if(y < paras.layerH / 2) {
+                    y = 0;
+                } else if(y >= imageH - paras.layerH / 2) {
+                    y = imageH - paras.layerH;
+                } else {
+                    y = y - paras.layerH / 2;
+                }
+
+                layer.css({
+                    left: x,
+                    top: y
+                });
+
+                img.css({
+                    left: -x * wTimes,
+                    top: -y * hTimes
+                });
+            }).on('mouseenter', function() {
+                layer.show();
+                showPanel.show();
+            }).on('mouseleave', function() {
+                layer.hide();
+                showPanel.hide();
+            });
+        });
+    }
+})(jQuery);
+
+</script>
+
+<script>
+    $('.show').zoomImage();
+$('.show-small-img:first-of-type').css({'border': 'solid 1px #951b25', 'padding': '2px'})
+$('.show-small-img:first-of-type').attr('alt', 'now').siblings().removeAttr('alt')
+$('.show-small-img').click(function () {
+  $('#show-img').attr('src', $(this).attr('src'))
+  $('#big-img').attr('src', $(this).attr('src'))
+  $(this).attr('alt', 'now').siblings().removeAttr('alt')
+  $(this).css({'border': 'solid 1px #951b25', 'padding': '2px'}).siblings().css({'border': 'none', 'padding': '0'})
+  if ($('#small-img-roll').children().length > 4) {
+    if ($(this).index() >= 3 && $(this).index() < $('#small-img-roll').children().length - 1){
+      $('#small-img-roll').css('left', -($(this).index() - 2) * 76 + 'px')
+    } else if ($(this).index() == $('#small-img-roll').children().length - 1) {
+      $('#small-img-roll').css('left', -($('#small-img-roll').children().length - 4) * 76 + 'px')
+    } else {
+      $('#small-img-roll').css('left', '0')
+    }
+  }
+})
+// 点击 '>' 下一张
+$('#next-img').click(function (){
+  $('#show-img').attr('src', $(".show-small-img[alt='now']").next().attr('src'))
+  $('#big-img').attr('src', $(".show-small-img[alt='now']").next().attr('src'))
+  $(".show-small-img[alt='now']").next().css({'border': 'solid 1px #951b25', 'padding': '2px'}).siblings().css({'border': 'none', 'padding': '0'})
+  $(".show-small-img[alt='now']").next().attr('alt', 'now').siblings().removeAttr('alt')
+  if ($('#small-img-roll').children().length > 4) {
+    if ($(".show-small-img[alt='now']").index() >= 3 && $(".show-small-img[alt='now']").index() < $('#small-img-roll').children().length - 1){
+      $('#small-img-roll').css('left', -($(".show-small-img[alt='now']").index() - 2) * 76 + 'px')
+    } else if ($(".show-small-img[alt='now']").index() == $('#small-img-roll').children().length - 1) {
+      $('#small-img-roll').css('left', -($('#small-img-roll').children().length - 4) * 76 + 'px')
+    } else {
+      $('#small-img-roll').css('left', '0')
+    }
+  }
+})
+// 点击 '<' 上一张
+$('#prev-img').click(function (){
+  $('#show-img').attr('src', $(".show-small-img[alt='now']").prev().attr('src'))
+  $('#big-img').attr('src', $(".show-small-img[alt='now']").prev().attr('src'))
+  $(".show-small-img[alt='now']").prev().css({'border': 'solid 1px #951b25', 'padding': '2px'}).siblings().css({'border': 'none', 'padding': '0'})
+  $(".show-small-img[alt='now']").prev().attr('alt', 'now').siblings().removeAttr('alt')
+  if ($('#small-img-roll').children().length > 4) {
+    if ($(".show-small-img[alt='now']").index() >= 3 && $(".show-small-img[alt='now']").index() < $('#small-img-roll').children().length - 1){
+      $('#small-img-roll').css('left', -($(".show-small-img[alt='now']").index() - 2) * 76 + 'px')
+    } else if ($(".show-small-img[alt='now']").index() == $('#small-img-roll').children().length - 1) {
+      $('#small-img-roll').css('left', -($('#small-img-roll').children().length - 4) * 76 + 'px')
+    } else {
+      $('#small-img-roll').css('left', '0')
+    }
+  }
+})
+
+</script>
+
+
+<script>
+    var profile = document.getElementById('profile')
+    var home = document.getElementById('home')
+    home.classList.add('active')
+    home.classList.add('show')
+    profile.classList.remove('active')
+</script>

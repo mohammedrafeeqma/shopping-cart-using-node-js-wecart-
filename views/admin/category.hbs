@@ -1,0 +1,164 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+
+
+<div class="container all-products pt-2">
+
+
+    <div class="my-3 d-flex justify-content-end">
+        {{!-- <a href="/admin/add-product" class="btn btn-success m-1">Add Prouduct</a> --}}
+        <a href="/admin/add-Category" class="btn btn-success m-1 ">Add Category</a>
+    </div>
+    
+<h5>All Products</h5>
+<hr>
+
+
+
+<div class="card">
+<table class="table table-hover shopping-cart-wrap">
+<thead class="text-muted">
+<tr>
+  <th scope="col">category Name</th>
+  {{!-- <th scope="col" width="120">Quantity</th>
+  <th scope="col" width="120">Price</th>
+  <th scope="col" width="200" class="text-right">Action</th> --}}
+</tr>
+</thead>
+<tbody>
+	{{#each category}}
+<tr>
+	<td>
+<figure class="media">
+	{{!-- <div class="img-wrap"><img src="/images/product-images/{{this._id}}_1.png" class="img-thumbnail img-sm"></div> --}}
+	<figcaption class="media-body">
+		<h6 class="title text-truncate">{{this.Name}}</h6>
+		{{!-- <dl class="param param-inline small">
+		  <dt>Size: </dt>
+		  <dd>{{this.size}}</dd>
+		</dl>
+		<dl class="param param-inline small">
+		  <dt>Brand: </dt>
+		  <dd>{{this.brand}}</dd>
+		</dl> --}}
+	</figcaption>
+</figure> 
+	</td>
+	
+	
+	<td class="text-right"> 
+	<a title="" href="/admin/edit-category/{{this._id}}" class="btn btn-outline-success me-3" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i class='fas fa-edit' style='font-size:16px'></i></a> 
+    <button value="{{this._id}}"  type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal" data-bs-target="#myModal"> × Remove</button>
+	
+	</td>
+</tr>
+
+
+<section class="modalcustomconfirmation">
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+		  
+		  
+       <a href="" class="btn btn-outline-danger confirm">Confirm</a>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+{{/each}}
+</tbody>
+</table>
+</div> <!-- card.// -->
+
+</div> 
+<!--container end.//-->
+</article>
+
+<script>
+	$(document).on("click", ".delete", function () {
+     var value = $(this).val();
+  console.log("value : ", $(this).val())
+
+   $(".modal-dialog .confirm").attr("href","/admin/delete-category/"+value)
+});
+</script>
+
+<style>
+    .all-products{
+        margin-top: 10%;
+        background-color: #ecf0f3;
+    }
+    @media(max-width:676px){
+      .all-products{
+        margin-top: 30%;
+      }
+    }
+    .param {
+    margin-bottom: 7px;
+    line-height: 1.4;
+}
+.param-inline dt {
+    display: inline-block;
+}
+.param dt {
+    margin: 0;
+    margin-right: 7px;
+    font-weight: 600;
+}
+.param-inline dd {
+    vertical-align: baseline;
+    display: inline-block;
+}
+
+.param dd {
+    margin: 0;
+    vertical-align: baseline;
+} 
+
+.shopping-cart-wrap .price {
+    color: #007bff;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+    display: block;
+}
+var {
+    font-style: normal;
+}
+
+.media img {
+    margin-right: 1rem;
+}
+.img-sm {
+    width: 90px;
+    max-height: 75px;
+    object-fit: cover;
+}
+</style>

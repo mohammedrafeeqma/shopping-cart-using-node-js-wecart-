@@ -1,0 +1,858 @@
+
+
+<div class="container margintop">
+    <div class="main-body">
+    
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb" class="main-breadcrumb pt-3 ">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/profile">User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+          <!-- /Breadcrumb -->
+    
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img  src="/images/profile/{{user._id}}.png" alt="profile pic" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4>{{user.username}}</h4>
+                      <p class="text-secondary mb-1">{{user.email}}</p>
+                      <p class="text-muted font-size-sm">{{address.address}}, {{address.city}} {{address.pincode}}</p>
+                      
+
+
+{{!--profile photo upload  --}}
+<section class="modalcustomconfirmation">
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal1">
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Upload Image</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      
+      <div class="modal-body">
+        {{!-- <form action="/upload-profile" method="post" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <button type="submit">upload</button>
+        </form> --}}
+
+        <form action="/upload-profile" method="post" enctype="multipart/form-data">
+          <label class="form-label" for="customFile"></label>
+          <input type="file" name="image" class="form-control image" id="customFile"  />
+          <button class="btn btn-primary mt-3" type="submit">upload</button>
+        </form>
+      </div>
+        
+
+      <!-- Modal footer -->
+      <div class="modal-footer border-0">
+		  
+		  
+
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+
+<script>
+	$(document).on("click", ".upload", function () {
+     var value = $(this).val();
+  console.log("value : ", $(this).val())
+
+   $(".modal-dialog .confirm1").attr("href","/admin/delete-category/"+value)
+});
+</script>
+<button value="{{this._id}}"  type="button" class="btn btn-outline-dark upload" data-bs-toggle="modal" data-bs-target="#myModal1">Change your picture </button>
+
+
+
+
+
+
+
+
+                      
+                      {{!-- <button class="btn btn-outline-primary">Message</button> --}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="card  h-50 bg-white extra">
+                {{!-- <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Orders</h6>
+                    <span class="text-secondary">https://bootdey.com</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
+                    <span class="text-secondary">bootdey</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
+                    <span class="text-secondary">@bootdey</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
+                    <span class="text-secondary">bootdey</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
+                    <span class="text-secondary">bootdey</span>
+                  </li>
+                </ul> --}}
+              </div>
+
+
+
+
+
+
+            </div>
+            <div class="col-md-8" >
+              <div class="card mb-3"  >
+                <div class="card-body" id="viewpro">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Firstname</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{user.firstname}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Lastname</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{user.lastname}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">username</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{user.username}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Mobile</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{user.mobile}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{user.email}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{address.address}}, {{address.city}}, {{address.pincode}}, {{address.state}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <button onclick="changediv()" class="btn btn-dark " target="__blank">Edit</button>
+                      <button onclick="changepass()" class="ms-3 border-0 bg-white text-primary" href="">change password</button>
+                      
+                        <button type="button" class="btn btn-dark ms-md-2 ms-0 mt-md-1 mt-2" data-bs-toggle="modal" data-bs-target="#myModalAddress">
+                            ADD NEW ADDRESS
+                        </button>
+                
+                    </div>
+                  </div>
+                </div>   
+
+                </div>
+
+
+                <div class="card mb-3" id="changepass" style="display: none;">
+                    <form action="/update-password" method="post">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Current Password</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input type="password" name="currentpassword" >
+                      
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">New Password</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input type="password" name="password">
+                      
+                    </div>
+                  </div>
+                  <hr>
+                 <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Confirm Password</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input type="password" name="confirm-password">
+                      
+                    </div>
+
+                </div>
+                  </div>
+                  
+                
+                  
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-dark ms-2 mb-4 " target="__blank">Update</button>
+                    </div>
+                  </div>
+                  </form>
+                </div>
+                
+                <div class="card mb-3" id="editpro" style="display: none;">
+                    <form action="/edit-profile" method="post">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Firstname</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input type="text" name="firstname" value="{{user.firstname}}">
+                      
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Lastname</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input type="text" name="lastname" value="{{user.lastname}}">
+                      
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">username</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input type="text" name="username" value="{{user.username}}">
+                        
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Mobile</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input type="text" name="mobile" value="{{user.mobile}}">
+                      
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <input type="text" name="email" value="{{user.email}}">
+                      
+                    </div>
+                  </div>
+                  
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-success " target="__blank">Update</button>
+                    </div>
+                  </div>
+                  </form>
+                </div>
+                
+
+
+              </div>
+
+              <div class="row gutters-sm">
+                  {{#each user.address}}
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card w-100 mt-3">
+                                <div class="card-body">
+                                    <label for="html">Address</label><br>
+                                    <h6 class="card-subtitle mb-2 text-muted mt-3 fs-6">{{this.username}}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{this.address}}, {{this.pincode}},
+                                        {{this.locality}}</h6>
+                                    <h6 class="card-subtitle mb-2 "><span class="text-muted">Mobile:
+                                        </span>{{this.mobile}}</h6>
+
+                                      <a href="/edit-address/{{this._id}}" class=" btn btn-outline-dark card-link">Edit</a>
+                                    
+                                    <button value="{{this._id}}"  type="button" class="btn btn-outline-dark card-link delete" data-bs-toggle="modal" data-bs-target="#myModalremove"> × Remove</button>
+
+                                </div>
+                            </div>
+                  </div>
+                </div>
+                {{/each}}
+               
+              </div>
+
+
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+
+    <section class="modalcustomconfirmation">
+
+<!-- The Modal -->
+<div class="modal fade" id="myModalremove">
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+		  
+		  
+       <a href="" class="btn btn-outline-danger confirm">Confirm</a>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop image</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal1" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="row">
+                                <div class="col-md-8">  
+                                    <!--  default image where we will set the src via jquery-->
+                                    <img id="image">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="preview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  <section class="alert">
+    
+
+<!-- The Modal -->
+<div class="modal fade" id="alert">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header border-0">
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <img height="150" src="https://thumbs.dreamstime.com/z/document-icon-information-sign-document-icon-faq-help-hint-symbol-vector-icon-document-icon-information-sign-112477632.jpg" alt="">
+        <p>File extension not supported!</p>
+        
+      </div>
+
+      <!-- Modal footer -->
+     
+
+    </div>
+  </div>
+</div>
+
+  </section>
+
+
+<script>
+	$(document).on("click", ".delete", function () {
+     var value = $(this).val();
+  console.log("value : ", $(this).val())
+
+   $(".modal-dialog .confirm").attr("href","/remove-proaddress/"+value)
+});
+</script>
+
+<script>
+   var proname = document.getElementById('profirstname').innerText;
+  var prolastname = document.getElementById('prolastname').innerText;
+  var proinitials = proname.charAt(0)+""+prolastname.charAt(0);
+  document.getElementById("proname").innerHTML = proinitials;
+</script>
+
+<script>
+    var viewpro = document.getElementById('viewpro')
+    var editpro = document.getElementById('editpro')
+    var chagepass = document.getElementById('changepass')
+    function changediv(){
+    
+        if(viewpro.style.display=='none')
+        {
+            viewpro.style.display='block'
+            editpro.style.display='none'
+             chagepass.style.display='none'
+            
+            
+        }
+        else{
+            viewpro.style.display='none'
+            editpro.style.display='block'
+            chagepass.style.display='none'
+            
+        }
+        
+    
+    }
+
+    function changepass(){
+    
+        
+        if(chagepass.style.display=='none')
+        {   
+            viewpro.style.display='none'
+            
+            chagepass.style.display='block'
+            
+           
+        }
+        
+    }
+</script>
+
+<style>
+  .margintop{
+    margin-top: 10%;
+  }
+  @media(max-width:676px){
+    .margintop{
+      margin-top: 30%;
+    }
+  }
+
+
+@media(min-width:767px){
+  .extra{
+    border: none;
+    margin-top: -4%;
+    
+  }
+  .margintop{
+    margin-top: 30%;
+  }
+
+
+
+
+ img {
+            display: block;
+            max-width: 100%;
+        }
+        .preview {
+            overflow: hidden;
+            width: 120px; 
+            height: 120px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+
+
+
+
+
+    .container{
+        
+    min-height: 100vh;
+    margin-top:10%;
+    color: #1a202c;
+    text-align: left;
+    background-color: #e2e8f0;    
+}
+
+@media(max-width:767px){
+  .container{
+    margin-top: 38%;
+    
+  }
+
+.main-body {
+    padding: 15px;
+    
+    min-height: 100vh;
+}
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.h-100 {
+    height: 100%!important;
+}
+.shadow-none {
+    box-shadow: none!important;
+}
+</style>
+
+
+
+
+<script>
+    var bs_modal1 = $('#myModal1');
+    var bs_modal = $('#modal1');
+    var bs_modalalert=$('#alert')
+    var image = document.getElementById('image');
+    var cropper,reader,file;
+   
+
+    $("body").on("change", ".image", function(e) {
+        var files = e.target.files;
+        var done = function(url) {
+            image.src = url;
+             var fname = e.target.files[0].name;
+            var re = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+if (!re.exec(fname)) {
+   bs_modal.modal('hide');
+  bs_modal1.modal('hide');
+  bs_modalalert.modal('show');
+  return false
+}
+else{
+    bs_modal.modal('show');
+
+}
+        
+        };
+
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    bs_modal.on('shown.bs.modal', function() {
+        cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 3,
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    $("#crop").click(function() {
+        canvas = cropper.getCroppedCanvas({
+            width: 160,
+            height: 160,
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+                var base64data = reader.result;
+
+                $.ajax({
+                    method: "POST",
+                    dataType: "json",
+                    url: "/upload-profile",
+                    data: {image: base64data},
+                    success: function(data) { 
+                        bs_modal.modal('hide');
+                         bs_modal1.modal('hide');
+                        location.href='/profile'
+                    }
+                });
+            };
+        });
+    });
+
+</script>
+
+
+
+<section>
+  <!-- The Modal -->
+                    <div class="modal" id="myModalAddress">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content bg-light">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">ADD NEW ADDRESS</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    
+                                    {{!-- body --}}
+                                    <div class="row">
+                                        <div class="col-12 mb-4">
+                                            <div class="card mb-4">
+
+                                                <div class="card-body">
+                                                    <form action="/add-addressprofile"  method="post">
+                                                    <p class="text-danger" id="message"></p>
+                                                        <div class="card-header py-1 mb-3">
+                                                            <h5 class="mb-0">Contact details</h5>
+                                                        </div>
+                                                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="username" type="text" id="Addusername"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="Name">Name</label>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <!-- Number input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="mobile" type="number" id="mobile"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example6">Mobile
+                                                                No.</label>
+                                                        </div>
+                                                        <div class="card-header py-1 mb-3">
+                                                            <h5 class="mb-0">ADDRESS</h5>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="pincode" type="text" id="pincode"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example4">Pin
+                                                                Code</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="address" type="text" id="address"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example4">Address(House
+                                                                No,Building, Street, Area)</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="locality" type="text" id="locality"
+                                                                class="form-control" />
+                                                            <label class="form-label"
+                                                                for="form7Example4">Locality/Town</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="city" type="text" id="city"
+                                                                class="form-control" />
+                                                            <label class="form-label"
+                                                                for="form7Example4">City/District</label>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="state" type="text" id="state"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example4">State</label>
+                                                        </div>
+
+                                                        <button onclick="return validateAddress()" style="background-color:#0F9CEB; color:white;"
+                                                            type="submit" class="btn w-100">Add Address</button>
+
+
+
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- body end --}}
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        {{!-- --}}
+
+
+                    </div>
+
+                    
+</section>
+
+<script>
+    var username = document.getElementById('Addusername')
+    var mobile = document.getElementById('mobile')
+    var pincode = document.getElementById('pincode')
+    var address = document.getElementById('address')
+    var locality = document.getElementById('locality')
+    var city = document.getElementById('city')
+    var state = document.getElementById('state')
+    function validateAddress(){
+        console.log(mobile.value)
+        if(username.value==''){
+            document.getElementById('message').innerHTML="please fill the username"
+            return false
+        }
+        else if(mobile.value==''){
+            document.getElementById('message').innerHTML="please fill the mobile"
+            return false
+        }
+        else if(pincode.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the pincode"
+            return false
+        }
+        else if(address.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the address"
+            return false
+        }
+        else if(locality.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the locality"
+            return false
+        }
+        else if(city.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the city"
+            return false
+        }
+        else if(state.value=='')
+        {
+            document.getElementById('message').innerHTML="please fill the state"
+            return false
+        }
+        else{
+            return true
+        }
+
+    }
+</script>
+

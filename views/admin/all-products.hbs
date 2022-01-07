@@ -1,0 +1,288 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+
+
+<div class="container all-products pt-2">
+
+
+    <div class="my-3 d-flex justify-content-end">
+        <a href="/admin/add-product" class="btn btn-success m-1">Add Prouduct</a>
+        
+    </div>
+    
+<h5>All Products</h5>
+<hr>
+
+
+
+<div class="hscroll">
+<table width="100%" border="1" cellspacing="0" cellpadding="6" id="datatable" class="table table-hover shopping-cart-wrap">
+<thead class="text-muted">
+<tr>
+  <th scope="col">Product</th>
+  <th scope="col" width="120">Quantity</th>
+  <th scope="col" width="120">Price</th>
+  <th scope="col" width="200" class="text-right">Action</th>
+</tr>
+</thead>
+<tbody>
+	{{#each products}}
+<tr>
+	<td>
+<figure class="media">
+	<div class="img-wrap"><img src="/images/product-images/{{this._id}}_1.png" class="img-sm"></div>
+	<figcaption class="media-body">
+		<h6 class="title text-truncate">{{this.Name}}</h6>
+		<dl class="param param-inline small">
+		  <dt>Category: </dt>
+		  <dd>{{this.category}}</dd>
+		</dl>
+		<dl class="param param-inline small">
+		  <dt>Brand: </dt>
+		  <dd>{{this.brand}}</dd>
+		</dl>
+	</figcaption>
+</figure> 
+	</td>
+	<td class="w-25"> 
+		<div class="d-flex">
+            <div class="me-3">
+            <dl>
+            <p>small: <span class="text-danger">{{this.size.s}}</span></p>
+        </dl>
+        <dl>
+            <p>medium: <span class="text-danger">{{this.size.m}}</span></p>
+        </dl>
+        </div>
+        <div>
+            <dl>
+            <p>large: <span class="text-danger">{{this.size.s}}</span></p>
+        </dl>
+        <dl>
+            <p>xl: <span class="text-danger">{{this.size.m}}</span></p>
+        </dl>
+        </div>
+        </div>
+        
+        
+	</td>
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price">₹ {{this.price}}</var> 
+			{{!-- <small class="text-muted">(USD5 each)</small>  --}}
+		</div> <!-- price-wrap .// -->
+	</td>
+	<td class="text-right"> 
+	<a title="" href="/admin/edit-product/{{this._id}}" class="btn btn-outline-success me-3" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i class='fas fa-edit' style='font-size:16px'></i></a> 
+	<button value="{{this._id}}"  type="button" class="btn btn-outline-danger delete mt-1" data-bs-toggle="modal" data-bs-target="#myModal"> × Remove</button>
+     
+	</td>
+</tr>
+<section>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+		  
+		  
+        <a href="/admin/delete-product/{{this._id}}" class="btn btn-outline text-white confirm">Confirm</a>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+
+{{/each}}
+</tbody>
+</table>
+</div> <!-- card.// -->
+
+</div> 
+<!--container end.//-->
+</article>
+
+<script>
+	$(document).on("click", ".delete", function () {
+     var value = $(this).val();
+  console.log("value : ", $(this).val())
+
+   $(".modal-dialog .confirm").attr("href","/admin/delete-product/"+value)
+});
+</script>
+
+<style>
+	.hscroll {
+  overflow-x: auto; /* Horizontal */
+}
+    .modal-confirm {		
+	color: #636363;
+	width: 400px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -10px;
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -2px;
+}
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;		
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}		
+.modal-confirm .icon-box {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	border-radius: 50%;
+	z-index: 9;
+	text-align: center;
+	border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i {
+	color: #f15e5e;
+	font-size: 46px;
+	display: inline-block;
+	margin-top: 13px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #60c7c1;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+	background: #c1c1c1;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+} 
+
+
+
+
+
+
+
+
+     
+    .all-products{
+        margin-top: 10%;
+        background-color: #ecf0f3;
+    }
+    .param {
+    margin-bottom: 7px;
+    line-height: 1.4;
+}
+.param-inline dt {
+    display: inline-block;
+}
+.param dt {
+    margin: 0;
+    margin-right: 7px;
+    font-weight: 600;
+}
+.param-inline dd {
+    vertical-align: baseline;
+    display: inline-block;
+}
+
+.param dd {
+    margin: 0;
+    vertical-align: baseline;
+} 
+
+.shopping-cart-wrap .price {
+    color: #007bff;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+    display: block;
+}
+var {
+    font-style: normal;
+}
+
+.media img {
+    margin-right: 1rem;
+}
+.img-sm {
+    width: 90px;
+    max-height: 75px;
+    object-fit: cover;
+}
+</style>
+
+<script>
+	$(document).ready( function () {
+    $('#datatable').DataTable();
+} );
+</script>

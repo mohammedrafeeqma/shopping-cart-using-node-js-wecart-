@@ -1,0 +1,90 @@
+<div class="p-4 me-1 pe-3 bg-white fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+      <img class="mt-1 ms-3" src="/images/Group 54.svg">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/dashboard">Dashboard</a>
+        </li>
+        
+        
+       <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/all-products">All Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/orders">Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/users">UserList</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/salesreport">Sales Report</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/banner">Banners</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/category">Category</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/brand">Brand</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-bold mx-3" aria-current="page" href="/admin/coupon">Coupon</a>
+        </li>
+        
+      </ul>
+      <form class="d-flex">
+        {{!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button> --}}
+       
+       {{#if admin}}
+        <div id="container">
+          <div id="name">
+          </div>
+        </div>
+        <a style="text-decoration: none;" href="/admin/logout" ><div class="ms-2 mt-2 text-dark fw-bold">Logout</div></a>
+        <input style="display: none;" id="user1" type="text" value="Amin">
+        <input style="display: none;" id="user2" type="text" value="Dmin">
+        
+        {{else}}
+        <div class="ms-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+        </div>
+         <a href="/login" ><div class="ms-2 mt-1 text-dark fw-bold">Login</div></a>
+         {{/if}}
+      </form>
+    </div>
+  </div>
+</nav>
+</div>
+
+<style>
+  #container {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 100px;
+  background: #333;
+}
+#name {
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 1em;
+  line-height: 40px;
+}
+</style>
+
+<script>
+   var name = document.getElementById('user1').value;
+  var lastname = document.getElementById('user2').value;
+  var initials = name.charAt(0)+""+lastname.charAt(0);
+  document.getElementById("name").innerHTML = initials;
+</script>

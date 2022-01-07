@@ -1,0 +1,114 @@
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+           
+          </ol>
+        </nav>
+      </div>
+
+      <div class="row">
+          <div class="container">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-3 text-gray-800">Order Details</h1>
+                     
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
+                                  
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <td>{{order._id}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <td>{{order.billingAddress.address.username}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Order Date</th>
+                                            <td>{{order.orderDate}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Payment Mode</th>
+                                            <td>{{order.paymentMethod}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Products</th>
+                                            <td>
+                                                {{#each order.products}}
+                                                    {{this.name}} X {{this.quantity}} &nbsp; (size:{{this.size}}) <br>
+                                                {{/each}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Amount</th>
+                                            <td>&#8377;{{order.total}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping Address</th>
+                                            <td>
+                                                {{order.deliveryaddress.address.username}},<br>
+                                                {{order.deliveryaddress.address.address}}, <br>{{order.deliveryaddress.address.city}}, {{order.deliveryaddress.address.state}} {{order.deliveryaddress.address.pincode}}.
+                                               <br> Mobile: {{order.deliveryaddress.address.mobile}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Order Status</th>
+                                            <td>{{order.order_status}}</td>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+                                        <form action="" method="post">
+                                        
+                                            <th>Action</th> 
+                                            <td>
+                                            {{#if order.order}}
+                                           
+                                                
+                                            
+                                                {{#if order.delivered}}
+                                                 <a href="/admin/delivered/{{order._id}}" class="m-md-1 m-2 btn " type="submit" name="status" value="2" style="background-color:rgb(0, 158, 34);color: white;">Delivered</a>
+                                                {{else}}
+
+                                                <a href="/admin/dispatched/{{order._id}}" class=" m-md-1 m-2 btn" type="submit" name="status" value="1" style="background-color:rgb(0, 107, 194);color: white;">Dispatched</a>
+                                                <a href="/admin/shipped/{{order._id}}" class="bg-warning text-white btn" type="submit" name="status" value="1">Shipped</a>
+                                                <a href="/admin/delivered/{{order._id}}" class="m-md-1 m-2 btn " type="submit" name="status" value="2" style="background-color:rgb(0, 158, 34);color: white;">Delivered</a>
+                                                <a href="/admin/reject/{{order._id}}" type="submit" class="btn" name="status" value="3" style="background-color:rgb(199, 0, 0);color: white;">Reject</a>
+                                                {{/if}}
+                                            {{else}}
+                                                 <p class="text-danger">order cancelled by user</p>
+                                            {{/if}}
+                                               
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </form>
+                                </tr>
+                           
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                <!-- /.container-fluid -->
+
+                 </div>
+
+<style>
+    .main-panel{
+    margin-top: 10%;
+    
+  }
+    @media(max-width:767px){
+  .main-panel{
+    margin-top: 25%;
+    
+  }
+}
+</style>

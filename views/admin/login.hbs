@@ -1,0 +1,51 @@
+<div class="login">
+    <div class="wrapper">
+    {{!-- <div class="logo"> <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt=""> </div> --}}
+    <div class="text-center mt-4 name"> WE <span>CART</span> Admin Login </div>
+     {{#if err}}
+            <p class="text-danger">incorrect password or username</p>
+        {{/if}}
+        {{#if loginErr}}
+        <p class="text-danger">invalid password or username</p>
+        {{/if}} 
+    <form action="/admin/login" onsubmit="return validate2()" class="p-3 mt-3" method="post">
+        <p class="text-danger" id="message"></p>
+        <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span> 
+        <input type="text" name="username" id="username" placeholder="Username"> </div>
+        <div class="form-field d-flex align-items-center"> <span class="fas fa-key"></span> 
+        <input type="password" name="password" id="password" placeholder="Password"> </div>
+         <button type="submit" class="btn mt-3">Login</button>
+         
+         
+    </form>
+   
+</div>
+</div>  
+
+<script>
+
+  function validate2(){
+  let username = document.getElementById('username');
+  let password = document.getElementById('password');
+  console.log(username)
+    if(username.value.trim()=="")
+    {
+      document.getElementById('message').innerHTML="username cannot be empty"
+      return false;
+    }
+    else if(password.value.trim()=="")
+    {
+      document.getElementById('message').innerHTML="password cannot be empty"
+      return false;
+    }
+    else if(password.value.length<4)
+    {
+        document.getElementById('message').innerHTML="password is too short";
+        
+        return false;
+    }
+    else{
+      return true;
+    }
+  }
+</script>

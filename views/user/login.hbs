@@ -1,0 +1,103 @@
+<div class="login">
+    <div class="wrapper">
+    {{!-- <div class="logo"> <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt=""> </div> --}}
+    <div class="text-center mt-4 name"> WE <span>CART</span> Login </div>
+    {{#if blockErr}}
+            <p class="text-danger ms-4 mt-3">You are bocked from admin</p>
+        {{/if}}
+        {{#if loginErr}}
+        <p class="text-danger ms-4 mt-3">invalid password or username</p>
+        {{/if}} 
+
+        <div class="show" id="show">
+            <form action="/login" method="post" class="p-3 mt-3" onsubmit="return validate1()">
+        <p class="text-danger" id="message"></p>
+        <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span> 
+        <input  type="text" name="email" id="email" placeholder="email"> </div>
+        <div class="form-field d-flex align-items-center"> <span class="fas fa-key"></span> 
+        <input type="password" name="password" id="password" placeholder="Password"> </div>
+         <button type="submit"  class="btn mt-3">Login</button>
+    </form>
+    <button onclick="hide()"  class="btn mt-3">Login with otp</button>
+        </div>
+    
+         
+    {{!-- login with otp --}}
+  <div class="hide" id="hide" style="display: none;" >
+    <form action="/mobileverify" onsubmit=" return phoneverify()" method="post" class="p-3 mt-3">
+    <p id="message1" class="message1 text-danger"></p>
+    <div class="text-center mt-4 name"> Login with Otp </div>
+      <div class="form-field d-flex align-items-center mt-2"> <span class="far fa-user"></span> 
+        <input   type="text" onkeypress="return validateNumber(event)" name="mobile" id="mobile" placeholder="Mobile"> </div>
+        <button type="submit"  class="btn mt-3">verify</button>
+    </form>
+  </div>
+    <div class="text-center fs-6"> <a href="#">Forget password?</a> or <a href="/signup">Sign up</a> </div>
+</div>
+</div>  
+{{!-- hide and show --}}
+<script>
+function hide() {
+  var y = document.getElementById("show");
+  var x = document.getElementById("hide");
+  if (x.style.display === "none") {
+    y.style.display = "none";
+    x.style.display="block"
+  } else {
+    y.style.display = "none";
+    x.style.display="block";
+  }
+}
+</script>
+
+<script>
+  let username = document.getElementById('username');
+  var email = document.getElementById('email');
+  let password = document.getElementById('password');
+  let exp = /^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})(.[a-z]{2,3})?$/
+  
+  function validate1(){
+    
+    if(email.value.trim()=="")
+    {
+      document.getElementById('message').innerHTML="email cannot be empty"
+      return false;
+    }
+    else if (exp.test(email.value)==false){  
+      console.log(exp.test(email.value))
+      document.getElementById('message').innerHTML="email is not valid"  
+      return false;  
+  } 
+    else if(password.value.trim()=="")
+    {
+      document.getElementById('message').innerHTML="password cannot be empty"
+      return false;
+    }
+    
+    else if(password.value.length.trim()<4)
+    {
+        document.getElementById('message').innerHTML="password is too short";
+        password.style.border="2px solid red"
+        return false;
+    }
+    else{
+      return true;
+    }
+  }
+</script>
+
+<script>
+  function phoneverify(){
+    
+    var mobile= document.getElementById('mobile')
+    if(mobile.value.trim()=="")
+    {
+      document.getElementById('message1').innerHTML="mobile cannot be empty"
+      return false;
+    }
+    
+    
+    
+  }
+</script>
+

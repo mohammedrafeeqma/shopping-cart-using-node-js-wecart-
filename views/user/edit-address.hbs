@@ -1,0 +1,107 @@
+<div class="container">
+    {{!-- body --}}
+                                    <div class="row  edit-address">
+                                        <div class="card-header py-1 mb-3 text-center">
+                                                            <h3 class="mb-0">Edit Address</h3>
+                                                        </div>
+                                        <div class="col-12 mb-4">
+                                            
+                                            <div class="card mb-4">
+                                                
+                                                <div class="card-body">
+                                                    
+                                                    <form action="/edit-address"  method="post">
+                                                    <p class="text-danger" id="message"></p>
+                                                        <div class="card-header py-1 mb-3">
+                                                            <h5 class="mb-0">Contact details</h5>
+                                                        </div>
+                                                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="username" value="{{address.address.username}}" type="text" id="Addusername"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="Name">Name</label>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <!-- Number input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input onkeypress="return validateNumber(event)" name="mobile" value="{{address.address.mobile}}" type="number" id="mobile"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example6">Mobile
+                                                                No.</label>
+                                                        </div>
+                                                        <div class="card-header py-1 mb-3">
+                                                            <h5 class="mb-0">ADDRESS</h5>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input onkeypress="return validateNumber(event)" value="{{address.address.pincode}}" name="pincode" type="text" id="pincode"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example4">Pin
+                                                                Code</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="address" value="{{address.address.address}}" type="text" id="address"
+                                                                class="form-control"/>
+                                                            <label class="form-label" for="form7Example4">Address(House
+                                                                No,Building, Street, Area)</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input value="{{address.address.locality}}" name="locality" type="text" id="locality"
+                                                                class="form-control" />
+                                                            <label class="form-label"
+                                                                for="form7Example4">Locality/Town</label>
+                                                        </div>
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="city" value="{{address.address.city}}" type="text" id="city"
+                                                                class="form-control" />
+                                                            <label class="form-label"
+                                                                for="form7Example4">City/District</label>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input name="state" type="text" value="{{address.address.state}}" id="state"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form7Example4">State</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="text" name="_id" value="{{address.address._id}}" class="d-none">
+                                                        </div>
+
+                                                        <button onclick="return validateAddress()" style="background-color:#0F9CEB; color:white;"
+                                                            type="submit" class="btn w-100">Update Address</button>
+
+
+
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- body end --}}
+
+                
+                                    </div>
+<style>
+    .edit-address{
+        background-color: #ecf0f3;
+        margin-top: 10%;
+        width: 50%;
+        margin-left: 20%;
+
+    }
+    @media(max-width:767px){
+  .edit-address{
+      margin-left: 1%;
+        margin-top: 45%;
+        width: 100%;
+
+    }
+}
+</style>
+</div>

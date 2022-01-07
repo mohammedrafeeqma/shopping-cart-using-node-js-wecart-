@@ -1,0 +1,266 @@
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  Order Success
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Order Success</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        {{!-- Modal body.. --}}
+
+        <div class="container">
+   <div class="row">
+      <div class="col-md-6 mx-auto mt-1 mb-3">
+         <div class="payment">
+            <div class="payment_header">
+               <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
+            </div>
+            <div class="content">
+               <h1>Payment Success !</h1>
+               <p>Orders id: {{orders._id}} </p>
+               <p>Date : {{orders.orderDate}} </p>
+               <p >Payment Method: {{orders.paymentMethod}} </p>
+               <a class="" href="/">Go to Home</a>
+            </div>
+            
+         </div>
+      </div>
+   </div>
+</div>
+        {{!-- modal body end --}}
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer border-0">
+        <div class="content">
+          
+        </div>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<a class="btn" data-toggle="modal" href="#myModal">Launch Modal</a>
+
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('#myModal1').modal('show');
+    });
+</script>
+
+<style>
+     .payment
+	{
+		border:1px solid #f2f2f2;
+		height:280px;
+        border-radius:20px;
+        background:#fff;
+	}
+   .payment_header
+   {
+	   background:rgb(2, 85, 20);
+	   padding:20px;
+       border-radius:20px 20px 0px 0px;
+	   
+   }
+   
+   .check
+   {
+	   margin:0px auto;
+	   width:50px;
+	   height:50px;
+	   border-radius:100%;
+	   background:#fff;
+	   text-align:center;
+   }
+   
+   .check i
+   {
+	   vertical-align:middle;
+	   line-height:50px;
+	   font-size:30px;
+   }
+
+    .content 
+    {
+        text-align:center;
+    }
+
+    .content  h1
+    {
+        font-size:25px;
+        padding-top:25px;
+    }
+
+    .content a
+    {
+        width:200px;
+        height:35px;
+        color:#fff;
+        border-radius:30px;
+        padding:5px 10px;
+        background:rgb(206, 4, 4);
+        transition:all ease-in-out 0.3s;
+    }
+
+    .content a:hover
+    {
+        text-decoration:none;
+        background:#000;
+    }
+   
+</style>
+
+
+<section class=""> 
+    <!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+  <!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner">
+    <div class="carousel-item">
+      <img class="banner1"  src="/images/banner-images/{{mainbanner._id}}.png" height="340" alt="Los Angeles" class="d-block ">
+    </div>
+    <div class="carousel-item active">
+       <img class="banner1" src="/images/Group 2.jpg" alt="Los Angeles" class="d-block">
+    </div>
+    <div class="carousel-item">
+      <img class="banner1" src="/images/Group 2.jpg" alt="Los Angeles" class="d-block">
+    </div>
+  </div>
+
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev slide-icon" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next slide-icon" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon slide-iocn"></span>
+  </button>
+</div>
+</section>
+
+
+<section>
+    <div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row">
+        {{#each products}}
+        <div class="col-md-3 col-lg-3 mt-4">
+            <div class="card w-100" >
+                <div class="card-body ">
+                    <div class="card-img-actions"> <img src="/images/product-images/{{this._id}}_1.png" class="card-img img-fluid" width="96" height="300" alt=""> </div>
+                </div>
+                <div class="card-body bg-light text-center" style="height: 230px;">
+                    <div class="mb-2">
+                        <h6 class="font-weight-semibold mb-2"> <a href="#" class="text-default mb-2" data-abc="true">{{this.Name}}</a> </h6> <a href="#" class="text-muted" data-abc="true">{{brand}}</a>
+                    </div>
+                    <h3 class="mb-0 font-weight-semibold">Rs {{this.price}}</h3>
+                    {{!-- <div> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> </div>     --}}
+                    <div class="text-muted mb-3">34 reviews</div>
+                     <a href="/product-view/{{this._id}}" type="button" class="btn bg-cart"><i class="fa fa-cart-plus ms-0"></i> Shop Now</a>
+                     <button onclick="addToCart('{{this._id}}')" class="btn bg-buy"><i class="fa fa-cart-plus ms-2"></i> Cart</button>
+                    
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+</section>
+
+<style>
+    body{
+        margin: 5%;
+        padding: 0;
+        min-height: 100vh;
+    }
+    .mt-50 {
+    margin-top: 50px
+}
+
+.mb-50 {
+    margin-bottom: 50px
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 20%;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .1875rem
+}
+
+.card-img-actions {
+    position: relative
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    text-align: center
+}
+
+.card-img {
+    width: 350px;
+}
+
+.star {
+    color: red
+}
+
+.bg-cart {
+    background-color: orange;
+    color: #fff
+}
+
+.bg-cart:hover {
+    color: #fff
+}
+
+.bg-buy {
+    background-color: #fb641b;
+    color: #fff;
+    padding-right: 29px;
+}
+
+.bg-buy:hover {
+    color: #fff
+}
+
+a {
+    text-decoration: none !important
+}
+
+
+
+</style>
+

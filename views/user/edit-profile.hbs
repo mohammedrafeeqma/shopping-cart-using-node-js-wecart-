@@ -1,0 +1,91 @@
+
+<div class="signup">
+  <div class="signup-form mt-5 ">
+    <form action="/signup" onsubmit="return signupvalidate()" method="post">
+		<h2>Edit Profile</h2>
+		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
+     {{!-- firstname and lastname --}}
+        <div class="form-group">
+          <p class="text-danger" id="message"></p>
+			<div class="row ">
+				<div  class="col">
+          <input id="firstname" type="text" class="form-control" name="firstname" placeholder="First Name" ></div>
+				<div  class="col">
+          <input type="text" id="lname"  class="form-control" name="lastname" placeholder="Last Name" ></div>
+			</div>        	
+        </div>
+        {{!-- username and mobile --}}
+        <div class="form-group">
+			<div class="row">
+				<div id="username"  class="col"><input type="text" class="form-control" name="username" placeholder="" ></div>
+				<div id="mobile" class="col"><input onkeypress="return validateNumber(event)" type="tel" class="form-control" name="mobile" placeholder="Mobile" ></div>
+			</div>        	
+        </div>
+        {{!-- email --}}
+        <div class="form-group">
+        	<input id="email" type="email" class="form-control" name="email" placeholder="Email" >
+        </div>
+        {{!-- address --}}
+        <div class="form-group">
+        	<input id="address" type="text" class="form-control" name="address" placeholder="Address(House No, Building, Street, Area)" >
+        </div>
+        {{!-- state and district --}}
+        <div class="form-group">
+			<div class="row">
+				<div id="city" class="col"><input type="text" class="form-control" name="city" placeholder="District/City" ></div>
+				<div id="state" class="col"><input type="text" class="form-control" name="state" placeholder="State" ></div>
+			</div>        	
+        </div>
+        {{!-- post and pin --}}
+        <div class="form-group">
+			<div class="row">
+				<div id="pincode" onkeypress="return validateNumber(event)" class="col"><input type="text" class="form-control" name="pincode" placeholder="Pin Code" ></div>
+				<div id="locality" class="col"><input type="text" class="form-control" name="locality" placeholder="locality" ></div>
+			</div>        	
+        </div>
+      {{!-- password --}}
+		<div class="form-group">
+            <input id="password" type="password" class="form-control" name="password" placeholder="Password" >
+        </div>
+        <div class="form-group">
+            <input id="confirm-password" type="password" class="form-control" name="confirm-password" placeholder="Confirm Password" >
+        </div>
+        <div class="form-group">
+			<label class="form-check-label"><input type="checkbox" > I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+		</div>
+		<div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+        </div>
+       
+        
+    </form>
+	<div class="text-center">Already have an account? <a href="#">Sign in</a></div>
+</div>
+</div>
+
+<script>
+
+  
+  
+  function signupvalidate(){
+  let firstname = document.getElementById('firstname')
+  let lname = document.getElementById('lname').valu
+  let username = document.getElementById('username').value
+  let mobile = document.getElementById('mobile').value
+  let email = document.getElementById('email').value
+  let address = document.getElementById('address').value
+  let city = document.getElementById('city').value
+  let state = document.getElementById('state').value
+    console.log(firstname.value)
+    if(firstname.trim()==""|| lname.trim()==""|| username.trim()==""||mobile.trim()==""||email.trim()==""||address==""||city==""||state=="")
+    {
+       document.getElementById('message').innerHTML="field cannot be empty"
+       location.href="#message"
+      return false;
+    }
+    else{
+      console.log("hiiii")
+      return true;
+    }
+  }
+</script>

@@ -1,0 +1,543 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/helpers.esm.min.js" integrity="sha512-urWBnIv+F027G24xDNigjxvIuwnWlWy94W2yx77VkISKLzKSohOKOubMDhtEF6LZcEH7gctmNSpxDqIW/zMmUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+
+<div class="row">
+    <div class="col-md-6 ">
+        <div class="container" style="margin-top: 20%; background-color: #F6F6F6;">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="container chart2" >
+            <canvas id="myChart1"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6 ">
+        <div class="container" style="margin-top: 10%; background-color: #F6F6F6;">
+            <canvas id="myChart3"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="container" style="margin-top: 10%; background-color: #F6F6F6;">
+            <canvas id="myChart4"></canvas>
+        </div>
+    </div>
+</div>
+
+
+{{!-- target button --}}
+<div class="d-flex justify-content-end me-2">
+    <button value=""  type="button" class="btn btn-dark mt-3 " data-bs-toggle="modal" data-bs-target="#myModal">Edit Target</button>
+</div>
+{{!-- target button end --}}
+
+        <div class="col-md-12 mt-2 ">
+    <div class="row ">
+        <div class="col-xl-3 col-lg-6">
+            <div class="card  background" style=" background-color: #F6F6F6;">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">Orders</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h2 id="order" class="d-flex align-items-center mb-0">
+                                {{order}}
+                            </h2>
+                        </div>
+                        <div id="" class="col-4 text-right">
+                            <span id=""><span id="orderpercentage"></span>% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div id="orderprogress" class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card l-bg-blue-dark background" style=" background-color: #F6F6F6;" >
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+                    <div class="mb-4">
+                        <h5 id="" class="card-title mb-0">Customers</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h2 id="customer" class="d-flex align-items-center mb-0">
+                                {{customer}}
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span> <span id="customerpercentage">9.23</span>% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div class="progress-bar l-bg-green" id="customerprogress" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card l-bg-green-dark "style=" background-color: #F6F6F6;">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-ticket-alt"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">Pending Orders </h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h2 id="pending" class="d-flex align-items-center mb-0">
+                                {{pendingorder}}
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span> <span id="pendingpercentage">10</span>% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div class="progress-bar l-bg-orange" id="pendingprogress" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card l-bg-orange-dark "style=" background-color: #F6F6F6;">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">Revenue</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h2 class="d-flex align-items-center mb-0">
+                              ₹ <span id="revenue" >{{revenue}}</span> 
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span> <span id="revenuepercentage">2.5</span> % <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div class="progress-bar l-bg-cyan" id="revenueprogress" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {{!-- <div class="col-6">
+      <div class="row d-flex justify-content-evenly">
+          <div class="col-5 bg-info py-5 my-3">
+              <h1>₹89.54</h1>
+              <p>daily Average</p>
+          </div>
+          <div class="col-5  bg-info py-5 my-3">
+sds
+          </div>
+      </div>
+    </div>
+    <div class="col-6">
+        <div class="row d-flex justify-content-evenly">
+          <div class="col-5 bg-info py-5 my-3">
+ds
+          </div>
+          <div class="col-5  bg-info py-5 my-3">
+sds
+          </div>
+      </div>
+
+    </div> --}}
+</div>
+
+{{!-- target --}}
+<p id="orderTarget" class="d-none">{{target.orderTarget}}</p>
+<p id="customerTarget" class="d-none">{{target.customerTarget}}</p>
+<p id="revenueTarget" class="d-none">{{target.revenueTarget}}</p>
+
+<script>
+    var order=document.getElementById('order').innerHTML
+    var orderpercentage = document.getElementById('orderpercentage')
+    var ordertarget = document.getElementById('orderTarget').innerHTML
+    var percentage = (order/ordertarget)*100
+    percentage=~~percentage
+    orderpercentage.innerHTML=percentage
+    document.getElementById('orderprogress').style.width=percentage+'%'
+
+    
+    //customer
+    var customer = document.getElementById('customer').innerHTML
+    var customerpercentage = document.getElementById('customerpercentage')
+    var customertarget = document.getElementById('customerTarget').innerHTML
+    var cpercentage = (customer/customertarget)*100
+    cpercentage=~~cpercentage
+    customerpercentage.innerHTML=cpercentage
+    document.getElementById('customerprogress').style.width=cpercentage+'%'
+
+
+    //pending orders
+    var pending = document.getElementById('pending').innerHTML
+    var pendingpercentage = document.getElementById('pendingpercentage')
+    var pendingtarget = order
+    var ppercentage = (pending/pendingtarget)*100;
+    ppercentage = ~~ppercentage
+    pendingpercentage.innerHTML=ppercentage
+    document.getElementById('pendingprogress').style.width=ppercentage+'%'
+
+    //revenu
+    var revenue = document.getElementById('revenue').innerHTML
+    var revenuepercentage = document.getElementById('revenuepercentage')
+    var revenuetarget = document.getElementById('revenueTarget').innerHTML
+    var rpercentage = (revenue/revenuetarget)*100
+    rpercentage=~~rpercentage
+    revenuepercentage.innerHTML=rpercentage
+    document.getElementById('revenueprogress').style.width=rpercentage+'%'
+
+    
+
+</script>
+
+
+
+
+{{!-- men --}}
+<p id="men" class="d-none">{{men}}</p>
+<p id="women" class="d-none">{{women}}</p>
+<p id="nike" class="d-none">{{nike}}</p>
+<p id="addidas" class="d-none">{{addidas}}</p>
+<p id="puma" class="d-none">{{puma}}</p>
+
+<script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+//Global options
+Chart.defaults.global.defaultFontFamily='Lato';
+Chart.defaults.global.defaultFontSize=18;
+Chart.defaults.global.defaultFontColor='#777';
+
+var men = document.getElementById('men').innerHTML
+var women = document.getElementById('women').innerHTML
+
+    let massPopChart = new Chart(myChart, {
+
+        type:'pie',//bar, horizontalbar, pie, line, doughnut, radar, polarArea
+        data:{
+            labels:['Men','Women'],
+            datasets:[{
+                label:'population',
+                data:[men, women],
+                // backgroundColor:'green'
+                backgroundColor:[
+                    '#4C91D1','#DAD558'
+                ],
+                borderWidth:1,
+                borderColor:'grey',
+                hoverBorderWidth:1,
+                hoverBorderColor:'black'
+            }]
+        },
+        options:{
+            title:{
+                display:'true',
+                text:'Top selling Products',
+                fontSize:25
+            },
+            legend:{
+                display:true,
+                position:'right',
+                labels:{
+                    fontColor:'black'
+                }
+            },
+            layout:{
+                padding:{
+                    left:50,
+                    right:0,
+                    botton:0,
+                    top:90
+                }
+            },
+            tooltips:{
+                enabled:true
+            }
+        }
+    })
+</script>
+
+
+<script>
+    let myChart1 = document.getElementById('myChart1').getContext('2d');
+//Global options
+Chart.defaults.global.defaultFontFamily='Lato';
+Chart.defaults.global.defaultFontSize=18;
+Chart.defaults.global.defaultFontColor='#777';
+
+var nike = document.getElementById('nike').innerHTML
+var addidas = document.getElementById('addidas').innerHTML
+var puma = document.getElementById('puma').innerHTML
+
+    let massPopChart1 = new Chart(myChart1, {
+        type:'pie',//bar, horizontalbar, pie, line, doughnut, radar, polarArea
+        data:{
+            labels:['Nike','Addidas','Puma'],
+            datasets:[{
+                label:'Brand',
+                data:[nike, addidas, puma],
+                // backgroundColor:'green'
+                backgroundColor:[
+                    '#2E68D9','#FC2525','#80E7FE'
+                ],
+                borderWidth:1,
+                borderColor:'grey',
+                hoverBorderWidth:1,
+                hoverBorderColor:'black'
+            }]
+        },
+        options:{
+            title:{
+                display:'true',
+                text:'Top selling brands',
+                fontSize:25
+            },
+            legend:{
+                display:true,
+                position:'right',
+                labels:{
+                    fontColor:'black'
+                }
+            },
+            layout:{
+                padding:{
+                    left:50,
+                    right:0,
+                    botton:0,
+                    top:90
+                }
+            },
+            tooltips:{
+                enabled:true
+            }
+        }
+    })
+</script>
+
+{{!-- chart 3 --}}
+<p class="d-none" id="january">{{january}}</p>
+<p class="d-none" id="feb">{{feb}}</p>
+<script>
+  var january = document.getElementById('january').innerHTML
+  var feb = document.getElementById('feb').innerHTML
+//Global options
+Chart.defaults.global.defaultFontFamily='Lato';
+Chart.defaults.global.defaultFontSize=18;
+Chart.defaults.global.defaultFontColor='#777';
+
+var nike = document.getElementById('nike').innerHTML
+var addidas = document.getElementById('addidas').innerHTML
+var puma = document.getElementById('puma').innerHTML
+
+    
+const ctx = document.getElementById('myChart3').getContext('2d');
+const myChart3 = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun','jul','aug','sep','oct','nov','dec'],
+        datasets: [{
+            label: ' Orders',
+            data: [january, feb, 0, 0, 0, 0,0,0,0,0,0,0],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+{{!-- chart 4 --}}
+<p class="d-none" id="janRevenue">{{janRevenue}}</p>
+<p class="d-none" id="febRevenue">{{febRevenue}}</p>
+<script>
+//Global options
+Chart.defaults.global.defaultFontFamily='Lato';
+Chart.defaults.global.defaultFontSize=18;
+Chart.defaults.global.defaultFontColor='#777';
+
+var janRevenue = document.getElementById('janRevenue').innerHTML
+var febRevenue = document.getElementById('febRevenue').innerHTML
+
+    
+const ctx2 = document.getElementById('myChart4').getContext('2d');
+const myChart4 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun','jul','aug','sep','oct','nov','dec'],
+        datasets: [{
+            label: 'Revenue',
+            data: [janRevenue, febRevenue, 0, 0, 0, 0,0,0,0,0,0,0],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+{{!--  --}}
+<style>
+
+    @media(max-width: 480px) {
+  body {
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: hidden !important;
+  }
+}
+
+
+    .background{
+        background-color: #F6F6F6;;
+    }
+.card {
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+
+
+.card .card-statistic-3 .card-icon-large .fas, .card .card-statistic-3 .card-icon-large .far, .card .card-statistic-3 .card-icon-large .fab, .card .card-statistic-3 .card-icon-large .fal {
+    font-size: 110px;
+}
+
+.card .card-statistic-3 .card-icon {
+    text-align: center;
+    line-height: 50px;
+    margin-left: 15px;
+    color: #e0dfdf;
+    position: absolute;
+    right: -5px;
+    top: 20px;
+    opacity: 0.1;
+}
+
+</style>
+
+
+{{!-- target --}}
+<section class="modalcustomconfirmation">
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Target</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <form action="/admin/target" method="post">
+          <div class="modal-body">
+        
+        <div class="form-group">
+                    <label for="comment">Order Target</label>
+                    <input type="text" name="order_target" onkeypress="return validateNumber(event)"  class="form-control h-25"></textarea>
+        </div>
+        <div class="form-group">
+                    <label for="comment">Customers Target</label>
+                    <input type="text" name="customer_target" onkeypress="return validateNumber(event)"  class="form-control h-25 "></textarea>
+        </div>
+        <div class="form-group">
+                    <label for="comment">Revenue Target</label>
+                    <input type="text" name="revenue_target" onkeypress="return validateNumber(event)"  class="form-control h-25 "></textarea>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <button type="submit" href="" class="btn btn-dark px-5 ">Set</button>
+        </div>
+        </div>
+      </form>
+
+     
+
+    </div>
+  </div>
+</div>
+</section>
+
+<style>
+    .chart2{
+        margin-top: 20%; 
+        background-color: #F6F6F6;
+    }
+    @media(max-width: 480px) {
+  .chart2{
+        margin-top: 1%; 
+        background-color: #F6F6F6;
+    }
+}
+
+</style>

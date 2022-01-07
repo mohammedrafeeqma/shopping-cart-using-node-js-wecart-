@@ -1,0 +1,120 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/helpers.esm.min.js" integrity="sha512-urWBnIv+F027G24xDNigjxvIuwnWlWy94W2yx77VkISKLzKSohOKOubMDhtEF6LZcEH7gctmNSpxDqIW/zMmUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="container" style="margin-top: 20%; background-color: #F6F6F6;">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="container" style="margin-top: 20%; background-color: #F6F6F6;">
+            <canvas id="myChart1"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+//Global options
+Chart.defaults.global.defaultFontFamily='Lato';
+Chart.defaults.global.defaultFontSize=18;
+Chart.defaults.global.defaultFontColor='#777';
+
+    let massPopChart = new Chart(myChart, {
+        type:'pie',//bar, horizontalbar, pie, line, doughnut, radar, polarArea
+        data:{
+            labels:['Men','Women'],
+            datasets:[{
+                label:'population',
+                data:[617594, 181045],
+                // backgroundColor:'green'
+                backgroundColor:[
+                    '#4C91D1','#DAD558'
+                ],
+                borderWidth:1,
+                borderColor:'grey',
+                hoverBorderWidth:1,
+                hoverBorderColor:'black'
+            }]
+        },
+        options:{
+            title:{
+                display:'true',
+                text:'Top selling Products',
+                fontSize:25
+            },
+            legend:{
+                display:true,
+                position:'right',
+                labels:{
+                    fontColor:'black'
+                }
+            },
+            layout:{
+                padding:{
+                    left:50,
+                    right:0,
+                    botton:0,
+                    top:0
+                }
+            },
+            tooltips:{
+                enabled:true
+            }
+        }
+    })
+</script>
+
+
+<script>
+    let myChart1 = document.getElementById('myChart1').getContext('2d');
+//Global options
+Chart.defaults.global.defaultFontFamily='Lato';
+Chart.defaults.global.defaultFontSize=18;
+Chart.defaults.global.defaultFontColor='#777';
+
+    let massPopChart1 = new Chart(myChart1, {
+        type:'bar',//bar, horizontalbar, pie, line, doughnut, radar, polarArea
+        data:{
+            labels:['Nike','Addidas','Puma'],
+            datasets:[{
+                label:'population',
+                data:[617594, 1831045,1801221],
+                // backgroundColor:'green'
+                backgroundColor:[
+                    '#2E68D9','#FC2525','#80E7FE'
+                ],
+                borderWidth:1,
+                borderColor:'grey',
+                hoverBorderWidth:1,
+                hoverBorderColor:'black'
+            }]
+        },
+        options:{
+            title:{
+                display:'true',
+                text:'Top selling brands',
+                fontSize:25
+            },
+            legend:{
+                display:true,
+                position:'right',
+                labels:{
+                    fontColor:'black'
+                }
+            },
+            layout:{
+                padding:{
+                    left:50,
+                    right:0,
+                    botton:0,
+                    top:0
+                }
+            },
+            tooltips:{
+                enabled:true
+            }
+        }
+    })
+</script>
