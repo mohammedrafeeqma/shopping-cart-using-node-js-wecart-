@@ -23,6 +23,12 @@
         </li> --}}
         
       </ul>
+      {{#if search}}
+      <form action="/search" method="post">
+        <input type="text" name="sample_search" id="sample_search" onkeyup="search_func(this.value);">
+        <button class="btn btn-secondary btn-sm" type="submit">Search</button>
+      </form>
+      {{/if}}
       <form class="d-flex">
         {{!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button> --}}
@@ -236,3 +242,4 @@
   var initials = name.charAt(0)+""+lastname.charAt(0);
   document.getElementById("name").innerHTML = initials;
 </script>
+

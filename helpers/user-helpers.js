@@ -210,13 +210,14 @@ module.exports = {
         quantity = parseInt(details.quantity)
         return new Promise((res,rej)=>{
             if(details.count==-1 && details.quantity==1){
-                db.get().collection(collection.CART_COLLECTION)
-                .updateOne({_id:objectId(details.cart)},
-                {
-                    $pull:{products:{item:objectId(details.product)}}
-                }).then((response)=>{
-                    res({removeProduct:true})
-                })
+                // db.get().collection(collection.CART_COLLECTION)
+                // .updateOne({_id:objectId(details.cart)},
+                // {
+                //     $pull:{products:{item:objectId(details.product)}}
+                // }).then((response)=>{
+                //     res({removeProduct:true})
+                // })
+                res({removeProduct:true})
             }
             
             else{
@@ -898,6 +899,16 @@ nike:()=>{
     
     return new Promise((resolve,reject)=>{
         db.get().collection(collection.PRODUCT_COLLECTION).find({brand:"Nike"}).toArray().then((response)=>{
+            resolve(response)
+        })
+    })
+},
+searchProduct:(product)=>{
+    console.log(11);
+    console.log(product.sample_search);
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.PRODUCT_COLLECTION).find({Name:{$regex:".*"+product.sample_search+".*"}}).toArray().then((response)=>{
+            console.log(response);
             resolve(response)
         })
     })

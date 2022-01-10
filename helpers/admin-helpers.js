@@ -316,6 +316,13 @@ module.exports = {
             })
         })
     },
+    couponExist:(coupon)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.COUPON_COLLECTION).findOne({coupon:coupon}).then((response)=>{
+                resolve(response)
+            })
+        })
+    },
     showCoupon: () => {
         return new Promise((resolve, reject) => {
             db.get().collection(collection.COUPON_COLLECTION).find().toArray().then((response) => {
@@ -640,6 +647,46 @@ module.exports = {
                 resolve(response)
             })
         })
+    },
+    showProductName:()=>{
+        
+            return new Promise((resolve, reject) => {
+                db.get().collection(collection.PRODUCT_COLLECTION).find({},{_id:0,Name:1}).toArray().then((response) => {
+                    resolve(response)
+                })
+            })
+        
+    },
+    addProductOffer: (data) => {
+        return new Promise(async (resolve, reject) => {
+            const result = await db.get().collection(collection.PRODUCT_COLLECTION).find({ Name: data.brand }).toArray()
+
+            console.log((result));
+            for (const x of result) {
+
+                let offerprice = parseInt(x.price)-(parseInt(x.price) * parseInt(data.discount)/100)
+                offerprice =~~offerprice+1
+                db.get().collection(collection.PRODUCT_COLLECTION).update({_id:x._id, Name: data.brand },
+                    {
+                        $set: {
+                            offer: parseInt(data.discount),
+                            offerprice: offerprice
+                        }
+                    }).then((response) => {
+                        resolve(response)
+                    })
+
+            }
+
+        })
+    },
+    showOffers:()=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.PRODUCT_COLLECTION).find().toArray().then((response)=>{
+                resolve(response)
+            })
+        })
+
     }
 
 }

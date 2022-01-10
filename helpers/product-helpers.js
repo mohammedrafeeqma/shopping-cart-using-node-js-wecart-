@@ -96,5 +96,59 @@ module.exports = {
                 console.log(response);
             })
         })
+    },
+    productSold:(proId)=>{
+        
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                {
+                    $match:{
+                        status:"paid"
+                    }
+                },
+                {
+                    $match:{
+                        
+                            "orderDate": 
+                            {
+                                $gte: new Date((new Date().getTime() - (10 * 24 * 60 * 60 * 1000)))
+                            }
+                        
+                    }
+                },
+                {
+                    $unwind: "$products"
+                },
+                {
+                $match: {
+                    'products.item': ObjectId(proId)
+                }
+            }, 
+            {
+                $group: { _id: { name: '$products.name', price: "$products.price", brand: "$products.brand" }, quantity: { $sum: "$products.quantity" } }
+            },
+        {
+            $project:{
+                quantity:1,
+                _id:0
+            }
+
+        }]).toArray().then((response) => {
+                console.log("***********");
+                console.log(response.length);
+                
+                if(response.length>0)
+                {
+                    console.log(response.quantity);
+                    resolve(response[0].quantity)
+                }
+                else{
+                    resolve(0)
+                }
+                
+               
+            })
+        })
+
     }
 }

@@ -488,20 +488,36 @@ router.get('/reject/:id',(req,res)=>{
   })
 })
 
-router.get('/coupon',verifyLogin,(req,res)=>{
+router.get('/coupon',verifyLogin,async(req,res)=>{
+  offerproduct = await adminHelpers.showOffers()
+  console.log("&***^*&*(((((");
+  console.log(offerproduct);
   adminHelpers.showCoupon().then((coupon)=>{
-    res.render('admin/coupon',{coupon,admin:true})
+    res.render('admin/coupon',{coupon,admin:true,offerproduct})
   })
 })
 router.get('/add-coupon',(req,res)=>{
   
-  res.render('admin/add-coupon',{admin:true})
+  res.render('admin/add-coupon',{admin:true,Exist:req.session.couponExist})
+  req.session.couponExist=false
 })
 router.post('/add-coupon',(req,res)=>{
   console.log(req.body);
-  adminHelpers.addCoupon(req.body).then((response)=>{
-    res.redirect('/admin/coupon')
+  adminHelpers.couponExist(req.body.coupon).then((response)=>{
+    if(response){
+
+      req.session.couponExist=true
+      res.redirect('/admin/add-coupon')
+
+    }
+    else{
+      adminHelpers.addCoupon(req.body).then((response)=>{
+        res.redirect('/admin/coupon')
+      })
+
+    }
   })
+  
 })
 
 router.get('/coupon-active/:id',(req,res)=>{
@@ -526,7 +542,8 @@ router.get('/logout',(req,res)=>{
 
 router.get('/salesreport',(req,res)=>{
   adminHelpers.salesReport().then((orders)=>{
-    res.render('admin/sales-report',{orders,admin:true, sales:req.session.dateSale,date:req.session.date})
+    res.render('admin/sales-report',{orders,admin:true, sales:req.session.dateSale,date:req.session.date,len:req.session.dateSalelength})
+    req.session.dateSalelength=null
     req.session.date=null
     req.session.dateSale=null
   })
@@ -549,7 +566,24 @@ router.get('/add-offer',async(req,res)=>{
 })
 router.post('/add-offer',(req,res)=>{
   adminHelpers.addOffer(req.body).then(()=>{
-    res.redirect('/admin/add-offer')
+    res.redirect('/admin/coupon')
+  })
+  
+})
+
+
+router.get('/productoffers',(req,res)=>{
+  adminHelpers.offers().then((offers)=>{
+    res.render('admin/offers')
+  })
+})
+router.get('/add-productoffer',async(req,res)=>{
+  let productName = await adminHelpers.showProductName()
+    res.render('admin/add-productoffer',{productName})
+})
+router.post('/add-productoffer',(req,res)=>{
+  adminHelpers.addProductOffer(req.body).then(()=>{
+    res.redirect('/admin/coupon')
   })
   
 })
@@ -557,8 +591,17 @@ router.post('/add-offer',(req,res)=>{
 router.post('/salesReport-date',(req,res)=>{
   console.log(req.body)
   adminHelpers.dateSale(req.body).then((data)=>{
-    req.session.date=req.body
+    console.log("%$##@");
+    console.log(data.length);
+    if(data.length==0)
+    {
+      req.session.dateSalelength=true
+    }
+    else{
+      req.session.date=req.body
     req.session.dateSale=data
+    }
+    
     res.json(data)
   })
 })

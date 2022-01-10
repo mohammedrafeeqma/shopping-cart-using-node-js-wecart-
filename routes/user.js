@@ -52,13 +52,14 @@ router.get('/', async function (req, res, next) {
     productHelpers.showProducts().then((products) => {
       // console.log(products);
       req.session.cartcount = cartcount;
-      res.render('user/index', {profilepic, products, user, cartcount, mainbanner });
+      res.render('user/index', {profilepic, products, user, cartcount, mainbanner,search:true,searchproduct:req.session.search });
+      req.session.search=null
     })
   }
   else {
     productHelpers.showProducts().then((products) => {
       // console.log(products);
-      res.render('user/index', { products, mainbanner })
+      res.render('user/index', { products, mainbanner,search:true })
     })
 
   }
@@ -329,11 +330,13 @@ router.get('/logout', function (req, res) {
 router.get('/product-view/:id', async function (req, res) {
   if (req.session.user) {
     user=req.session.user
+    
     var cartcount = await productHelpers.getCartCount(user._id)
   }
+  let productSold = await productHelpers.productSold(req.params.id)
 
   productHelpers.getProductDetails(req.params.id).then((products) => {
-    res.render('user/product-view', {profilepic, products, user: req.session.user, cartcount })
+    res.render('user/product-view', {profilepic, productSold, products, user: req.session.user, cartcount })
   })
 
 })
@@ -741,10 +744,11 @@ router.get('/paypal-success', (req, res) => {
       console.log(444409);
         console.log(JSON.stringify(payment));
         let orders = await userHelpers.getLastOrders(req.session.user._id)
+        let products =await productHelpers.showProducts()
         userHelpers.removerFromCart(req.session.user._id)
         paymentMethod="paypal"
         userHelpers.changePaymentStatus(orders._id,paymentMethod).then(()=>{
-          res.render('user/order-success', {profilepic, user: req.session.user, orders })
+          res.render('user/order-success', {profilepic,products, user: req.session.user, orders })
         })
  
     }
@@ -890,7 +894,36 @@ router.post('/demo', (req, res) => {
 router.get('/chart', (req, res) => {
   res.render('user/chart')
 })
+router.post ('/search',(req,res)=>{
+  userHelpers.searchProduct(req.body).then(async(response)=>{
+    
+    var mainbanner = await adminHelpers.getMainBanner()
 
+  if (req.session.loggedIn) {
+    user = req.session.user
+    let cartcount = await productHelpers.getCartCount(user._id)
+    let userDetails = await userHelpers.user(req.session.user._id)
+    console.log(userDetails.profile);
+    profilepic=userDetails
+    productHelpers.showProducts().then((products) => {
+      // console.log(products);
+      req.session.cartcount = cartcount;
+      res.render('user/product-search', {profilepic, response, user, cartcount, mainbanner,search:true,searchproduct:req.session.search });
+      req.session.search=null
+    })
+  }
+  else {
+    productHelpers.showProducts().then((products) => {
+      // console.log(products);
+      res.render('user/product-search', { response, mainbanner,search:true })
+    })
+
+  }
+
+  })
+  console.log(req.body)
+  
+})
 
 
 module.exports = router;

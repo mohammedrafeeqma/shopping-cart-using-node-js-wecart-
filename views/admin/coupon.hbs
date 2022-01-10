@@ -15,9 +15,10 @@
         {{!-- <a href="/admin/add-product" class="btn btn-success m-1">Add Prouduct</a> --}}
         <a href="/admin/add-coupon" class="btn btn-success m-1 ">Add Coupon</a>
         <a href="/admin/add-offer" class="btn btn-success m-1 ">Add Offer</a>
+        <a href="/admin/add-productoffer" class="btn btn-success m-1 ">Add Product Offer</a>
     </div>
     
-<h5>All Coupons</h5>
+<h5 class="text-center">All Coupons</h5>
 <hr>
 
 
@@ -136,9 +137,119 @@
 </div>
 </section>
 {{/each}}
+
 </tbody>
 </table>
 </div> <!-- card.// -->
+
+
+
+{{!-- offers --}}
+
+<h5 class="text-center">All Offers</h5>
+<hr>
+
+
+
+<div class="hscroll">
+<table width="100%" border="1" cellspacing="0" class="table table-hover shopping-cart-wrap">
+<thead class="text-muted">
+<tr>
+  <th scope="col"> Name</th>
+  
+  <th scope="col">offer %</th>
+  {{!-- <th scope="col" width="120">Quantity</th>
+  <th scope="col" width="120">Price</th>
+  <th scope="col" width="200" class="text-right">Action</th> --}}
+</tr>
+</thead>
+<tbody>
+	{{#each offerproduct}}
+<tr class="tablerow">
+	<td>
+<figure class="media">
+	{{!-- <div class="img-wrap"><img src="/images/product-images/{{this._id}}_1.png" class="img-thumbnail img-sm"></div> --}}
+	<figcaption class="media-body">
+		<h6 class="title text-truncate">{{this.Name}}</h6>
+		{{!-- <dl class="param param-inline small">
+		  <dt>Size: </dt>
+		  <dd>{{this.size}}</dd>
+		</dl>
+		<dl class="param param-inline small">
+		  <dt>Brand: </dt>
+		  <dd>{{this.brand}}</dd>
+		</dl> --}}
+	</figcaption>
+</figure> 
+	</td>
+
+
+  
+
+    <td>
+<figure class="media">
+	{{!-- <div class="img-wrap"><img src="/images/product-images/{{this._id}}_1.png" class="img-thumbnail img-sm"></div> --}}
+	<figcaption class="media-body">
+		<h6 class="title text-truncate">{{this.offer}}%</h6>
+		{{!-- <dl class="param param-inline small">
+		  <dt>Size: </dt>
+		  <dd>{{this.size}}</dd>
+		</dl>
+		<dl class="param param-inline small">
+		  <dt>Brand: </dt>
+		  <dd>{{this.brand}}</dd>
+		</dl> --}}
+	</figcaption>
+</figure> 
+	</td>
+	
+	
+	<td class="text-right"> 
+      
+	{{!-- <a title="" href="/admin/edit-coupon/{{this._id}}" class="btn btn-outline-success me-3" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i class='fas fa-edit' style='font-size:16px'></i></a>  --}}
+    {{!-- <button value="{{this._id}}"  type="button" class="btn btn-outline-danger delete me-4 mt-2 mt-md-0" data-bs-toggle="modal" data-bs-target="#myModal">Remove</button> --}}
+	
+	</td>
+</tr>
+
+
+<section class="modalcustomconfirmation">
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered modal-confirm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+		  
+		  
+       <a href="" class="btn btn-outline-danger confirm">Confirm</a>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+{{/each}}
+
+</tbody>
+</table>
+</div> 
 
 </div> 
 <!--container end.//-->

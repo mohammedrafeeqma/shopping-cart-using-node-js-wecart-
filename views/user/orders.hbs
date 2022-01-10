@@ -18,6 +18,7 @@
 
 
 
+
 <div class="hscroll">
   {{#if orders}}
 
@@ -95,14 +96,15 @@
 
 </div> <!-- card.// -->
 {{else}}
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-5 " style="min-height: 100vh;">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
+        <div class="col-md-12 " >
+            <div class="card" style="min-height: 100vh;">
                 
-                <div class="card-body cart">
-                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://previews.123rf.com/images/jovanas/jovanas1602/jovanas160200128/51873245-order-now-shopping-cart.jpg" width="130" height="130" class="img-fluid mb-4 mr-3">
-                        <h3><strong>Your Order is Empty</strong></h3>
+                <div class="card-body cart" style="margin-top: 15%;">
+                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://previews.123rf.com/images/jovanas/jovanas1602/jovanas160200128/51873245-order-now-shopping-cart.jpg" width="130" height="130" class="img-fluid  mr-3">
+                        <h3><strong>You haven’t placed any orders
+</strong> <p class="fs-6 text-secondary">All your orders will appear here</p></h3>
                         <h4></h4> <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
                     </div>
                 </div>

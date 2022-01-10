@@ -106,13 +106,14 @@ a {
 
 
 <section>
-    <div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="container mt-50 mb-50">
     <div class="row">
         
-
+        {{#if response}}
         
-        {{#each products}}
-        <div class="col-md-3 col-lg-3 mt-4 tablerow">
+
+        {{#each response}}
+        <div class="col-md-3 col-lg-3 mt-4">
             <div class="card w-100" >
                 <div class="card-body ">
                     <a href="/product-view/{{this._id}}">
@@ -126,7 +127,7 @@ a {
                     <div class="mb-2">
                         <h6 class="font-weight-semibold mb-2"> <a href="/product-view/{{this._id}}" id="content" class="text-default mb-2" data-abc="true">{{this.Name}}</a> </h6> <a href="#" class="text-muted" data-abc="true">{{brand}}</a>
                     </div>
-                    <h3 class="mb-3 font-weight-semibold">₹<span id="offer" class="offer">{{this.offer}} </span >&nbsp;
+                    <h3 class="mb-3 font-weight-semibold">₹<span id="offer" class="offer">{{this.offerprice}} </span >&nbsp;
                      <del> <span class=" text-secondary" style="font-size: 18px; font-weight: 100;">₹</span><span class="price text-secondary" style="font-size: 18px; font-weight: 100;">{{this.price}} </span> </del>
                       <span style="font-size: 16px;" class="text-success"> {{this.offer}}% off</span></h3>
                     {{!-- <div> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> <i class="fa fa-star star"></i> </div>     --}}
@@ -164,6 +165,29 @@ a {
         </div>
         {{/each}}
 
+    {{else}}
+
+
+        <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    No Matches found</h2>
+                <div class="error-details">
+                    We did not find any products for your search
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    {{/if}}
   
     </div>
 </div>
@@ -259,6 +283,12 @@ a {
 </script>
 
 <style>
+
+
+    body { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAABHklEQVRIib2Vyw6EIAxFW5idr///Qx9sfG3pLEyJ3tAwi5EmBqRo7vHawiEEERHS6x7MTMxMVv6+z3tPMUYSkfTM/R0fEaG2bbMv+Gc4nZzn+dN4HAcREa3r+hi3bcuu68jLskhVIlW073tWaYlQ9+F9IpqmSfq+fwskhdO/AwmUTJXrOuaRQNeRkOd5lq7rXmS5InmERKoER/QMvUAPlZDHcZRhGN4CSeGY+aHMqgcks5RrHv/eeh455x5KrMq2yHQdibDO6ncG/KZWL7M8xDyS1/MIO0NJqdULLS81X6/X6aR0nqBSJcPeZnlZrzN477NKURn2Nus8sjzmEII0TfMiyxUuxphVWjpJkbx0btUnshRihVv70Bv8ItXq6Asoi/ZiCbU6YgAAAABJRU5ErkJggg==);}
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
 
   
     /*--thank you pop starts here--*/

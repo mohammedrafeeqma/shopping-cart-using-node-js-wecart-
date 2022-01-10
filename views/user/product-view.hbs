@@ -43,13 +43,18 @@
             <div class="col-md-12">
                         <div class="product p-4">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
+                                <div class="d-flex align-items-center"> <a style="text-decoration: none;" class="text-dark" href="/"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span></a> </div> <i class="fa fa-shopping-cart text-muted"></i>
                             </div>
                             <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">{{products.brand}}</span>
                                 <h5 class="text-uppercase">{{products.Name}}</h5>
                                 <div class="price d-flex flex-row align-items-center"> <span class="act-price">₹ {{products.offerprice}}&nbsp;&nbsp; </span>  <del> <span class=" text-secondary" style="font-size: 18px; font-weight: 100;"></span><span class="price text-secondary" style="font-size: 16px; font-weight: 100;"> ₹{{products.price}} </span> </del> <span style="font-size: 16px;" class="text-success">&nbsp; {{products.offer}}% off</span>
+                                  
+                                  
                                     {{!-- <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div> --}}
                                 </div>
+                                <p class="mt-2"><svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow text-success fs-2" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z"/>
+</svg> {{productSold}} people ordered this in the last 10 Days</p>
                             </div>
                             <p class="about">{{products.description}}</p>
                             <div class="sizes mt-5">
@@ -61,11 +66,14 @@
                                   </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span>
                                    </label>
                             </div>
-                            <div class="cart mt-4 align-items-center">
-                                 <button   onclick="addToCart('{{products._id}}')" class="btn btn-danger text-uppercase my-2 mr-2 px-4">Add to cart</button>
+                            <div class="cart mt-2">
+                                 <button   onclick="addToCart('{{products._id}}')" class="btn btn-danger text-uppercase my-2 mr-2 px-4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+</svg> Add to cart</button>
                                  <button  onclick="addToCart('{{products._id}}')" href="#" style="background-color: #fb641b;"  class="btn text-uppercase text-white mr-2 px-4 " >Buy Now</button>
                                  
-                                  <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
+                                  {{!-- <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>  --}}
+                                  </div>
                         </div>
                     </div>
         </div>
@@ -247,7 +255,7 @@
 </div>
         </div>
     </div>
-  	<hr>
+  	<hr class="d-none">
 </div>
                             {{!--  --}}
                         </div>

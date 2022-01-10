@@ -15,7 +15,7 @@
                     </select>
                     
                     <label for="">Discount in %</label>
-                    <input type="text" name="discount" class="form-control w-75"  onkeypress="return validateNumber(event)" min="1" max="90" class="form-control w-75"  id="code_pin" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2">
+                    <input  type="text" name="discount" class="form-control w-75"  onkeypress="return validateNumber(event)" min="1" max="90" class="form-control w-75"  id="code_pin" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2">
                     <label for="">Expire Date</label>
                     <input id="expiredate" type="date" name="expireDate" class="form-control w-75">
                     <button style="width: 5em; height:2em" type="submit" class="btn btn-success mt-4">Submit</button>
@@ -36,20 +36,52 @@
 <script>
       
     function categoryvalidate(){ 
-        alert("hii")
-        var username1 = document.getElementById('code_pin').innerHTML
+        
+        var username1 = document.getElementById('code_pin')
         var brand = document.getElementById('brand').value
         
         console.log(brand)
-        console.log(username1)
+        console.log(username1.value)
         
-        if(username1.trim()=="" || brand == "Brand")
+        if(username1.value.trim()=="" || brand == "Brand")
         {   
             document.getElementById('message').innerHTML="cannot be empty"
             return false; 
         }
         else{
+            
+            console.log(username1)
             return true
         }
     }
+</script>
+
+
+<script>
+     
+
+    $(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var maxDate = year + '-' + month + '-' + day;
+
+    // or instead:
+    // var maxDate = dtToday.toISOString().substr(0, 10);
+
+    
+    $('#expiredate').attr('min', maxDate);
+});
+
+
+var maxDate = year + '-' + month + '-' + day;
+    
+    $('#expiredate').attr('min', maxDate);
 </script>

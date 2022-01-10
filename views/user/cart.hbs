@@ -37,7 +37,7 @@
 
                                 <td class="m-0 md-1 p-md-1 p-0">
                                     <div class="d-md-flex ">
-                                         <button class=" btn-secondary cart-item-count me-md-2 p-0 p-md-1" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+                                         <button class=" btn-secondary cart-item-count me-md-2 p-0 p-md-1 delete" value="{{this.product._id}}" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
                                     <span class="mt-2" id="{{this.product._id}}">{{this.quantity}}</span>
                                     <button class=" btn-secondary cart-item-count ms-0 ms-md-2 p-0 p-md-1 " onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
                                     </div>
@@ -429,7 +429,7 @@ display: -webkit-box;
             success:(response)=>{
                 if(response.removeProduct){
                     
-                    var bs_myModal2 = $('#myModal2');
+                    var bs_myModal2 = $('#myModal');
                     bs_myModal2.modal('show').then(()=>{
                         location.reload()
                     })
@@ -442,13 +442,19 @@ display: -webkit-box;
                     console.log(productQuantity)
                     if(productQuantity>=10 && count=='1')
                     {
+                        productQuantity=productQuantity-1
                         console.log("cannot increment")
+                        
                         return false
                     }
-                    document.getElementById(prodId).innerHTML=quantity+count
+                    else{
+                         document.getElementById(prodId).innerHTML=quantity+count
                     document.getElementById(prodId+"1").innerHTML="Subtotal ₹:"+response.subtotal
                     document.getElementById('total').innerHTML=response.total
                      document.getElementById('total1').innerHTML=response.total
+
+                    }
+                   
                     
                 }
             }
@@ -510,7 +516,7 @@ display: -webkit-box;
 
 <!-- The Modal -->
 <div class="modal fade" id="myModal2">
-  <div class="modal-dialog modal-dialog-centered ">
+  <div class="modal-dialog modal-dialog-centered  ">
     <div class="modal-content">
 
       <!-- Modal Header -->

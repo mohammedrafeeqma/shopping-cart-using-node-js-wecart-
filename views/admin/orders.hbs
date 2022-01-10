@@ -70,13 +70,19 @@
                     </td>
                     <td>
                         {{!-- <p>{{this.orders.order_status}}</p> --}}
+                        {{#if this.orders.delivered}}
+                            <p>{{this.orders.order_status}}</p>
+                             {{else}}
                         <select onchange="selectboxchange(event)" name="status" id="selectbox"
                             class="form-select selectbox" aria-label="Default select example">
+                            
                             <option value="{{this._id}}">{{this.orders.order_status}}</option>
                             <option value="{{this._id}}">pending</option>
                             <option value="{{this._id}}">Shipped</option>
                             <option value="{{this._id}}">delivered</option>
+                            
                         </select>
+                        {{/if}}
                     </td>
                     <td>
                         <div class="price-wrap">

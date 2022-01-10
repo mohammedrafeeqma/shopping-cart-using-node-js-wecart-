@@ -23,11 +23,23 @@
       <th scope="col">Product Name</th>
       <th scope="col">Brand Name</th>
       <th scope="col">price</th>
-      <th scope="col">quantity</th>
+      <th scope="col">Sold</th>
       <th scope="col">total</th>
     </tr>
   </thead>
   <tbody>
+    {{#if len}}
+    <tr class="table-secondary text-dark">
+      <td></td>
+      <td></td>
+      <td data-label="Brand Name " class="text-dark fw-bolder" style="width: 100%;">data not found</td>
+      <td></td>
+      <td></td>
+      
+    </tr>
+
+    {{else}}
+
     {{#if sales}}
     <p id="startDate" class="d-none ms-2">{{date.startDate}} </p>
     <span><b>From: </b></span>
@@ -39,7 +51,7 @@
       <td data-label="Product Name"><span class="">{{this._id.name}}</span> <span class="badge rounded-pill" id="badge"></span> </td>
       <td data-label="Brand Name">{{this._id.brand}}</td>
       <td class="subjects" data-label="price">{{this._id.price}}</td>
-      <td class="subjects" data-label="Quantity">{{this.quantity}}</td>
+      <td class="subjects" data-label="Sold">{{this.quantity}}</td>
       <td id="total" data-label="Total">{{this.quantity}}</td>
     </tr>
     {{/each}}
@@ -56,37 +68,56 @@
     {{/each}}
 
     {{/if}}
+  {{/if}}
   
   </tbody>
 </table>
 </div>
 
 <script>
+  const d = new Date();
+let hour = d.getHours();
+console.log(hour)
   startDate = document.getElementById('startDate').innerHTML
   endDate = document.getElementById('endDate').innerHTML
   startDate1= document.getElementById('startDate1')
   endDate1= document.getElementById('endDate1')
   startDate = startDate.split("00:")[0]
-  endDate = endDate.split("23:")[0]
+  endDate = endDate.split(hour || "23:59")[0]
   startDate1.innerHTML=" "+startDate
   endDate1.innerHTML=" " +endDate
 </script>
 
 {{!-- Date filter --}}
 <script type="text/javascript">
+
+
 $(function() {
+
+
+
+
+
+
+  
+  console.log(document.getElementById('datefilter'))
 
   $('input[name="datefilter"]').daterangepicker({
       autoUpdateInput: false,
+      maxDate:new Date(),
+      
       locale: {
           cancelLabel: 'Clear'
       }
   });
 
+  
+
   $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
       $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
       var startDate= picker.startDate
       var endDate = picker.endDate
+     
     
       $.ajax({
         method:'post',
