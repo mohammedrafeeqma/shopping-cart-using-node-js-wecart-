@@ -8,6 +8,7 @@ var session = require('express-session')
 var db = require('./config/connection')
 var fileUpload = require('express-fileupload')
 var bodyParser = require('body-parser')
+require('dotenv').config()
 
 
 
