@@ -659,8 +659,8 @@ console.log(grandtotal);
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "https://wecart.tk/paypal-success",
-            "cancel_url": "https://wecart.tk/cancel"
+            "return_url": "Https://www.wecart.tk/paypal-success",
+            "cancel_url": "Https://www.wecart.tk/cancel"
         },
         "transactions": [{
             "item_list": {
